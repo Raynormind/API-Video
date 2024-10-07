@@ -38,7 +38,7 @@ Lesly-Junior Gourdet
 Jacob Zapitoski
 
 ## Licence
-For open source projects, say how it is licensed.
+Licence GNU GPL
 
 ## Project status
 En développement.
