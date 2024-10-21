@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 class UtilisateurController {
+    
+    @GetMapping("/video")
+    fun obtenirUtilisateur() = Utilisateur(1, "Bob")
+
 
     @GetMapping("/videos")
     fun obtenirVideosUtilisateur(): ResponseEntity<Utilisateur> = ResponseEntity(

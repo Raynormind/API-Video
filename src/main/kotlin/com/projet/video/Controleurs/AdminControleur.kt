@@ -14,11 +14,11 @@ import org.springframework.http.ResponseEntity
 @RestController
 class AdminController {
 
-    @PutMapping("/videos/{id_video}?statut={statut}")
+    @PutMapping("/videosss/{id_video}?statut={statut}")
     fun modifierStatutVideo(@PathVariable id_video: Int, @PathVariable statut: String): ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 
-    @DeleteMapping("/videos/{id_video}")
+    @DeleteMapping("/videosss/{id_video}")
     fun supprimerVideo(@PathVariable id_video: Int): ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 }

@@ -11,15 +11,15 @@ import org.springframework.http.ResponseEntity
 @RestController
 class PubliqueController {
     
-    @GetMapping("/videos")
+    @GetMapping("/videoss")
     fun obtenirVideos(): ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 
-    @GetMapping("/videos/{id_video}")
+    @GetMapping("/videoss/{id_video}")
     fun obtenirUneVideo(@PathVariable id_video: Int): ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 
-    @GetMapping("/videos?nom={titre}")
+    @GetMapping("/videoss?nom={titre}")
     fun obtenirVideoParRechercheTitre(@PathVariable titre: String) : ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED) 
 
