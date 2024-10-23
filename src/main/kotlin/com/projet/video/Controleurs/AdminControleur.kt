@@ -8,17 +8,19 @@ import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 
 @RestController
+@RequestMapping("/video")
 class AdminController {
 
-    @PutMapping("/videosss/{id_video}?statut={statut}")
+    @PutMapping("/videos/{id_video}?statut={statut}")
     fun modifierStatutVideo(@PathVariable id_video: Int, @PathVariable statut: String): ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 
-    @DeleteMapping("/videosss/{id_video}")
+    @DeleteMapping("/videos/{id_video}")
     fun supprimerVideo(@PathVariable id_video: Int): ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 }
