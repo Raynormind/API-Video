@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/video")
 class UtilisateurController {
 
+
     @GetMapping("/videos")
     fun obtenirVideosUtilisateur(): ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
