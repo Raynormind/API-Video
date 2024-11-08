@@ -20,6 +20,8 @@ USE `LeslyJacobVideodb` ;
 CREATE TABLE IF NOT EXISTS `LeslyJacobVideodb`.`Utilisateur` (
   `idUtilisateur` INT NOT NULL,
   `nom` VARCHAR(45) NOT NULL,
+  `courriel` VARCHAR(45) NOT NULL,
+  `coordonnées` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idUtilisateur`),
   UNIQUE INDEX `nom_UNIQUE` (`nom` ASC))
 ENGINE = InnoDB;
@@ -35,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `LeslyJacobVideodb`.`Video` (
   `miniature` VARCHAR(255),
   `fichier_video` VARCHAR(255) NOT NULL,
   `date_publication` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `statut` SET('public', 'privé') NOT NULL DEFAULT 'public',
+  `status` SET('public', 'privé') NOT NULL DEFAULT 'public',
   `auteur` INT NOT NULL,
   PRIMARY KEY (`idVideo`),
   UNIQUE INDEX `titre_UNIQUE` (`titre` ASC),

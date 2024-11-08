@@ -14,43 +14,43 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/video")
-class UtilisateurController {
+@RequestMapping("/videos")
+class VideoController {
 
 
-    @GetMapping("/videos")
+    @GetMapping()
     fun obtenirVideosUtilisateur(): ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 
-    @GetMapping("/videos/{id_video}")
+    @GetMapping("/{id_video}")
     fun obtenirUneVideoUtilisateur(@PathVariable id_video:Int) : ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 
-    @GetMapping("/videos?titre={titre}")
+    @GetMapping("?titre={titre}")
     fun obtenirVideoParRechercheTitre(@PathVariable titre: String) : ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 
-    @GetMapping("/videos?auteur={auteur}")
+    @GetMapping("?auteur={auteur}")
     fun obtenirVideoParRechercheAuteur(@PathVariable auteur: String) : ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED) 
 
-    @GetMapping("/videos/{id_video}?statut={statut}")
-    fun obtenirStatutVideo(@PathVariable id_video: Int, @PathVariable statut: String): ResponseEntity<Video> = ResponseEntity(
+    @GetMapping("/{id_video}/status")
+    fun obtenirStatutVideo(@PathVariable id_video: Int, @PathVariable status: String): ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
     
-    @PostMapping("/videos")
+    @PostMapping("/")
     fun creerVideoUtilisateur(@RequestBody video: Video): ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 
-    @PutMapping("/videos/{id_video}")
+    @PutMapping("/{id_video}")
     fun modifierVideoUtilisateur(@PathVariable id_video: Int, @RequestBody video: Video): ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 
-    @PutMapping("/videos/{id_video}?statut={statut}")
-    fun modifierStatutVideoUtilisateur(@PathVariable id_video: Int, @PathVariable statut: String): ResponseEntity<Video> = ResponseEntity(
+    @PutMapping("/{id_video}?status={status}")
+    fun modifierStatutVideoUtilisateur(@PathVariable id_video: Int, @PathVariable status: String): ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 
-    @DeleteMapping("/videos/{id_video}")
+    @DeleteMapping("/{id_video}")
     fun supprimerVideoUtilisateur(@PathVariable id_video: Int): ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
     
