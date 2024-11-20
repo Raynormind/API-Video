@@ -15,5 +15,10 @@ class GestionnaireExceptionsControleur() {
     fun gérerRessourceInexistanteException(exception: RessourceInexistanteException, requête: WebRequest): MessageErreur =
         MessageErreur(HttpStatus.NOT_FOUND.value(), LocalDateTime.now(), exception.message, requête.getDescription(false))
 
+    @ExceptionHandler(MauvaiseRequeteException::class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    fun gérerMauvaiseRequeteException(exception: MauvaiseRequeteException, requête: WebRequest): MessageErreur =
+        MessageErreur(HttpStatus.BAD_REQUEST.value(), LocalDateTime.now(), exception.message, requête.getDescription(false))
+
     
 }

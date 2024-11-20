@@ -9,7 +9,7 @@ interface VideosDAO: DAO<Video> {
     override fun chercherParTitre(titre: String): List<Video>
     override fun chercherParAuteur(auteur: Utilisateur): List<Video>
     override fun chercherParStatut(statut: String): List<Video>
-    override fun ajouter(element: Video): Video?
-    override fun modifier(id_video: Int, element: Video): Video?
+    override fun ajouter(video: Video): Video?
+    override fun modifier(id_video: Int, video: Video): Video?
     override fun effacer(id_video: Int)
 }
