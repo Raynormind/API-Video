@@ -1,11 +1,8 @@
 
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
-INSERT INTO `LeslyJacobVideodb`.`Utilisateur` (idUtilisateur, nom, courriel, coordonnées) VALUES
+INSERT INTO pnomLeslyJacobVideodb.Utilisateur (idUtilisateur, nom, courriel, coordonnées) VALUES
 (1, 'Alice Martin', 'alice.martin@domaine.com', '+33 6 12 34 56 78'),
 (2, 'Bob Dupont', 'bob.dupont@domaine.com', '+33 6 12 34 56 79'),
 (3, 'Chloé Bernard', 'chloe.bernard@domaine.com', '+33 6 12 34 56 80'),
@@ -108,16 +105,16 @@ INSERT INTO `LeslyJacobVideodb`.`Utilisateur` (idUtilisateur, nom, courriel, coo
 (100, 'Xavier Marchand', 'xavier.marchand@domaine.com', '+33 6 12 34 56 177');
 
 
-INSERT INTO `LeslyJacobVideodb`.`Video` (titre, description, miniature, fichier_video, date_publication, status, auteur) VALUES
+INSERT INTO  pnomLeslyJacobVideodb.Video (titre, description, miniature, fichier_video, date_publication, status, auteur) VALUES
 ("Les Aventures d'Alice", 'Une aventure captivante dans un monde fantastique.', 'miniature1.jpg', 'video1.mp4', '2023-01-01', 'public', 1),
 ('Voyage au Centre de la Terre', 'Une exploration des profondeurs de notre planète.', 'miniature2.jpg', 'video2.mp4', '2023-01-02', 'public', 2),
-('La Magie de Noël', "Un film sur l'esprit des fêtes.", 'miniature3.jpg', 'video3.mp4', '2023-01-03', 'public', 3),
-('Un Monde Sous-Marin', "Découvrez les merveilles de l'océan.", 'miniature4.jpg', 'video4.mp4', '2023-01-04', 'public', 4),
-('Secrets de la Nature', 'Un documentaire sur la biodiversité.', 'miniature5.jpg', 'video5.mp4', '2023-01-05', 'public', 5),
-('Les Robots de Demain', 'Un aperçu des technologies futures.', 'miniature6.jpg', 'video6.mp4', '2023-01-06', 'public', 6),
-('Histoire des Civilisations', 'Un voyage à travers le temps.', 'miniature7.jpg', 'video7.mp4', '2023-01-07', 'public', 7),
+('La Magie de Noël', "Un film sur l'esprit des fêtes.", 'miniature3.jpg', 'video3.mp4', '2023-01-03', 'public', 5),
+('Un Monde Sous-Marin', "Découvrez les merveilles de l'océan.", 'miniature4.jpg', 'video4.mp4', '2023-01-04', 'public', 5),
+('Secrets de la Nature', 'Un documentaire sur la biodiversité.', 'miniature5.jpg', 'video5.mp4', '2023-01-05', 'privé', 5),
+('Les Robots de Demain', 'Un aperçu des technologies futures.', 'miniature6.jpg', 'video6.mp4', '2023-01-06', 'public', 5),
+('Histoire des Civilisations', 'Un voyage à travers le temps.', 'miniature7.jpg', 'video7.mp4', '2023-01-07', 'privé', 5),
 ('La Cuisine Française', 'Recettes et astuces culinaires.', 'miniature8.jpg', 'video8.mp4', '2023-01-08', 'public', 8),
-('Techniques de Peinture', 'Apprenez les bases de la peinture.', 'miniature9.jpg', 'video9.mp4', '2023-01-09', 'public', 9),
-('Fitness à la Maison', 'Des exercices à faire chez soi.', 'miniature10.jpg', 'video10.mp4', '2023-01-10', 'public', 10),
+('Techniques de Peinture', 'Apprenez les bases de la peinture.', 'miniature9.jpg', 'video9.mp4', '2023-01-09', 'privé', 9),
+('Fitness à la Maison', 'Des exercices à faire chez soi.', 'miniature10.jpg', 'video10.mp4', '2023-01-10', 'privé', 10),
 ('Voyage en Asie', 'Découvrez les cultures asiatiques.', 'miniature100.jpg', 'video100.mp4', '2023-04-10', 'public', 100);
 
