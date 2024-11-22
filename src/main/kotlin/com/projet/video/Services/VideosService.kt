@@ -7,12 +7,11 @@ import com.projet.video.Modele.Utilisateur
 
 @Service
 class VideosService(private val videosDAO: VideosDAOImpl){
-    //fun obtenirJoueurs(): List<Video> = videosDAO.chercherTous()
-    //fun obtenirJoueurParId(idStr: String) : Video? {
-    //    val id = (idStr.toIntOrNull() ?: 
-    //        throw RequêteMalFormuléeException("L'id $idStr n'est pas dans un format valide."))
-    //    return videosDAO.chercherParId(id)
-    //}
+    fun obtenirVideos(): List<Video> = videosDAO.chercherTous()
+    fun obtenirUneVideoUtilisateur(id_video: Int): Video? = videosDAO.chercherParId(id_video)
+    fun obtenirVideoParRechercheTitre(titre: String): List<Video> = videosDAO.chercherParTitre(titre)
+    fun obtenirStatutVideo(statut: String): List<Video> = videosDAO.chercherParStatut(statut)
+
     fun chercherParAuteur(auteur: Utilisateur): List<Video?> = videosDAO.chercherParAuteur(auteur)
     fun ajouter(video: Video): Video? = videosDAO.ajouter(video)
     fun modifier(id_video: Int, video: Video): Video? = videosDAO.modifier(id_video, video)
