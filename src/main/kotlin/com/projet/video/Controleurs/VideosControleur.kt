@@ -1,7 +1,7 @@
 package com.projet.video.Controleurs
 
-import com.projet.video.Modèle.Utilisateur
-import com.projet.video.Modèle.Video
+import com.projet.video.Modele.Utilisateur
+import com.projet.video.Modele.Video
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.PostMapping
