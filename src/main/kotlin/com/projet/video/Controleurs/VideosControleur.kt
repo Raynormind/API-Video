@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.http.ResponseEntity
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 
 @RestController
 @RequestMapping("/videos")
@@ -36,11 +37,24 @@ class VideosController( private val videosService: VideosService ) {
     fun obtenirStatutVideo(@PathVariable id_video: Int, @PathVariable status: String): ResponseEntity<Video> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 
-    @GetMapping("?auteur={auteur}")
-    fun obtenirVideoParRechercheAuteur(@PathVariable auteur: Utilisateur) : ResponseEntity<Video> = ResponseEntity.ok( videosService.chercherParAuteur( auteur.id_utilisateur ) )
+    @GetMapping("?auteur={nomAuteur}")
+    fun obtenirVideoParRechercheAuteur(@PathVariable auteur: Utilisateur) : ResponseEntity<List<Video>> = ResponseEntity.ok( videosService.chercherParAuteur( auteur ) )
         
     @PostMapping
-    fun creerVideo(@RequestBody video: Video): ResponseEntity<Video> = ResponseEntity.ok( videosService.ajouter(video))
+    fun creerVideo(@RequestBody video: Video): ResponseEntity<Video>{ 
+        val nouvelleVideo =  videosService.ajouter(video)
+        if( nouvelleVideo != null){
+            val uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{auteur}")
+                .buildAndExpand(nouvelleVideo.auteur)
+                .toUri()
+
+            return ResponseEntity.created(uri).body(nouvelleVideo)
+
+        }
+        return ResponseEntity.badRequest().build()
+
+    } 
 
     @PutMapping("/{id_video}")
     fun modifierVideo(@PathVariable id_video: Int, @RequestBody video: Video): ResponseEntity<Video> = ResponseEntity.ok( videosService.modifier(id_video, video))

@@ -18,7 +18,7 @@ class VideosService(private val videosDAO: VideosDAO){
     fun obtenirVideoParRechercheTitre(titre: String): List<Video> = videosDAO.chercherParTitre(titre)
     fun obtenirStatutVideo(statut: String): List<Video> = videosDAO.chercherParStatut(statut)
 
-    fun chercherParAuteur(auteur: Utilisateur): List<Video?> = videosDAO.chercherParAuteur(auteur)
+    fun chercherParAuteur(auteur: Utilisateur): List<Video> = videosDAO.chercherParAuteur(auteur)
     fun ajouter(video: Video): Video? = videosDAO.ajouter(video)
     fun modifier(id_video: Int, video: Video): Video? = videosDAO.modifier(id_video, video)
     fun effacer(id_video: Int) {
