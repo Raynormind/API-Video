@@ -27,12 +27,12 @@ class VideosServiceTests {
         courriel = "alice.martin@domaine.com", 
         coordonnées ="+33 6 12 34 56 78")
     
-    val a2 =Utilisateur(id_utilisateur = 1,
+    val a2 =Utilisateur(id_utilisateur = 2,
         nom = "Bob Dupont", 
         courriel = "bob.dupont@domaine.com", 
         coordonnées ="+33 6 12 34 56 79")
     
-    val a3 =Utilisateur(id_utilisateur = 1,
+    val a3 =Utilisateur(id_utilisateur = 3,
         nom = "Chloé Bernard", 
         courriel = "chloe.bernard@domaine.com", 
         coordonnées ="+33 6 12 34 56 80")
