@@ -16,7 +16,7 @@ class VideosService(private val videosDAO: VideosDAO){
 	@PostAuthorize("hasRole('ADMIN') || authentication.principal.username == returnObject.prenom ")
     fun obtenirUneVideoUtilisateur(id_video: Int): Video? = videosDAO.chercherParId(id_video)
     fun obtenirVideoParRechercheTitre(titre: String): List<Video> = videosDAO.chercherParTitre(titre)
-    fun obtenirStatutVideo(statut: String): List<Video> = videosDAO.chercherParStatut(statut)
+    fun obtenirStatutVideo(id_video: Int, status: String): List<Video> = videosDAO.chercherParStatut(id_video, status)
 
     fun chercherParAuteur(auteur: Utilisateur): List<Video> = videosDAO.chercherParAuteur(auteur)
     fun ajouter(video: Video): Video? = videosDAO.ajouter(video)

@@ -26,15 +26,15 @@ class VideosController( private val videosService: VideosService ) {
         HttpStatus.NOT_IMPLEMENTED)
 
     @GetMapping("/{id_video}")
-    fun obtenirUneVideoUtilisateur(@PathVariable id_video:Int) : ResponseEntity<Video> = ResponseEntity(
+    fun obtenirUneVideoUtilisateur(@PathVariable id_video:Int) : ResponseEntity<Video?> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 
     @GetMapping("?titre={titre}")
-    fun obtenirVideoParRechercheTitre(@PathVariable titre: String) : ResponseEntity<Video> = ResponseEntity(
+    fun obtenirVideoParRechercheTitre(@PathVariable titre: String) : ResponseEntity<List<Video>> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 
     @GetMapping("/{id_video}/status")
-    fun obtenirStatutVideo(@PathVariable id_video: Int, @PathVariable status: String): ResponseEntity<Video> = ResponseEntity(
+    fun obtenirStatutVideo(@PathVariable id_video: Int, @PathVariable status: String): ResponseEntity<List<Video>> = ResponseEntity(
         HttpStatus.NOT_IMPLEMENTED)
 
     @GetMapping("?auteur={nomAuteur}")
