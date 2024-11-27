@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
+import com.projet.video.Exceptions.RessourceInexistanteException
+
 
 @RestController
 @RequestMapping("/videos")
@@ -25,12 +27,12 @@ class VideosController( private val videosService: VideosService ) {
     fun obtenirVideos() = videosService.chercherTous()
 
     @GetMapping("/{id_video}")
-    fun obtenirUneVideoUtilisateur(@PathVariable id_video:Int) = videosService.chercherParId( id_video )
+    fun obtenirUneVideoUtilisateur(@PathVariable id_video:Int) = videosService.chercherParId( id_video ) ?: throw RessourceInexistanteException("La video $id_video n'est pas inscrite au service.")
 
     @GetMapping("?titre={titre}")
     fun obtenirVideoParRechercheTitre(@PathVariable titre: String) = videosService.chercherParTitre( titre )
 
-    @GetMapping("/{id_video}/status")
+    @GetMapping("/{id_video}/{status}")
     fun obtenirStatutVideo(@PathVariable id_video: Int, @PathVariable status: String) = videosService.chercherParStatut( id_video, status )
 
     @GetMapping("?auteur={nomAuteur}")
