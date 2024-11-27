@@ -11,12 +11,12 @@ import com.projet.video.Modele.Utilisateur
 @Service
 class VideosService(private val videosDAO: VideosDAO){
     @Secured("ROLE_ADMIN")
-    fun obtenirVideos(): List<Video> = videosDAO.chercherTous()
+    fun chercherTous(): List<Video> = videosDAO.chercherTous()
     @PreAuthorize("hasRole('USER')")
 	@PostAuthorize("hasRole('ADMIN') || authentication.principal.username == returnObject.prenom ")
-    fun obtenirUneVideoUtilisateur(id_video: Int): Video? = videosDAO.chercherParId(id_video)
-    fun obtenirVideoParRechercheTitre(titre: String): List<Video> = videosDAO.chercherParTitre(titre)
-    fun obtenirStatutVideo(id_video: Int, status: String): List<Video> = videosDAO.chercherParStatut(id_video, status)
+    fun chercherParId(id_video: Int): Video? = videosDAO.chercherParId(id_video)
+    fun chercherParTitre(titre: String): List<Video> = videosDAO.chercherParTitre(titre)
+    fun chercherParStatut(id_video: Int, status: String): List<Video> = videosDAO.chercherParStatut(id_video, status)
 
     fun chercherParAuteur(auteur: Utilisateur): List<Video> = videosDAO.chercherParAuteur(auteur)
     fun ajouter(video: Video): Video? = videosDAO.ajouter(video)
