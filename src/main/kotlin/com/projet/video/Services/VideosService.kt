@@ -14,15 +14,19 @@ import com.projet.video.Exceptions.ConflitAvecUneRessourceExistanteException
 @Service
 class VideosService(private val videosDAO: VideosDAO){
     @Secured("ROLE_ADMIN")
-    fun obtenirVideos(): List<Video> = videosDAO.chercherTous()
+    fun chercherTous(): List<Video> = videosDAO.chercherTous()
     @PreAuthorize("hasRole('USER')")
-	@PostAuthorize("hasRole('ADMIN') || authentication.principal.email == returnObject.auteur.email ")
-    fun obtenirUneVideoUtilisateur(id_video: Int): Video? {
-            return videosDAO.chercherParId(id_video)
-        }
-    fun obtenirVideoParRechercheTitre(titre: String): List<Video> = videosDAO.chercherParTitre(titre)
-    fun obtenirStatutVideo(statut: String): List<Video> = videosDAO.chercherParStatut(statut)
+	@PostAuthorize("hasRole('ADMIN') || authentication.principal.email =  returnObject.auteur.courriel")
+    fun chercherParId(id_video: Int): Video {
+        val video = videosDAO.chercherParId(id_video)
 
+        if ( video == null ) throw RessourceInexistanteException("La video $id_video n'est pas inscrite au service.")
+
+        return video
+    }
+
+    fun chercherParTitre(titre: String): List<Video> = videosDAO.chercherParTitre(titre)
+    fun chercherParStatut(id_video: Int, status: String): List<Video> = videosDAO.chercherParStatut(id_video, status)
     fun chercherParAuteur(auteur: Utilisateur): List<Video> = videosDAO.chercherParAuteur(auteur)
     @PreAuthorize("hasRole('USER')")
     fun ajouter(video: Video): Video {

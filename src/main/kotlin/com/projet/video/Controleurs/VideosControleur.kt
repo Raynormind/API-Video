@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import org.springframework.security.access.prepost.PreAuthorize
 
+
 @RestController
 @RequestMapping("/videos")
 @CrossOrigin
@@ -24,20 +25,16 @@ class VideosController( private val videosService: VideosService ) {
 
 
     @GetMapping()
-    fun obtenirVideos(): ResponseEntity<Video> = ResponseEntity(
-        HttpStatus.NOT_IMPLEMENTED)
+    fun obtenirVideos() = videosService.chercherTous()
 
     @GetMapping("/{id_video}")
-    fun obtenirUneVideoUtilisateur(@PathVariable id_video:Int) : ResponseEntity<Video> = ResponseEntity(
-        HttpStatus.NOT_IMPLEMENTED)
+    fun obtenirUneVideoUtilisateur(@PathVariable id_video:Int) = videosService.chercherParId( id_video )
 
     @GetMapping("?titre={titre}")
-    fun obtenirVideoParRechercheTitre(@PathVariable titre: String) : ResponseEntity<Video> = ResponseEntity(
-        HttpStatus.NOT_IMPLEMENTED)
+    fun obtenirVideoParRechercheTitre(@PathVariable titre: String) = videosService.chercherParTitre( titre )
 
-    @GetMapping("/{id_video}/status")
-    fun obtenirStatutVideo(@PathVariable id_video: Int, @PathVariable status: String): ResponseEntity<Video> = ResponseEntity(
-        HttpStatus.NOT_IMPLEMENTED)
+    @GetMapping("/{id_video}/{status}")
+    fun obtenirStatutVideo(@PathVariable id_video: Int, @PathVariable status: String) = videosService.chercherParStatut( id_video, status )
 
     @GetMapping("?auteur={nomAuteur}")
     fun obtenirVideoParRechercheAuteur(@PathVariable auteur: Utilisateur) : ResponseEntity<List<Video>> = ResponseEntity.ok( videosService.chercherParAuteur( auteur ) )

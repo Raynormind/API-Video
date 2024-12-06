@@ -7,7 +7,7 @@ interface DAO<T> {
     fun chercherParId(id_video: Int): T?
     fun chercherParTitre(titre: String): List<T>
     fun chercherParAuteur(auteur: Utilisateur): List<T>
-    fun chercherParStatut(statut: String): List<T>
+    fun chercherParStatut(id_video: Int, status: String): List<T>
     fun ajouter(video: T): T?
     fun modifier(id_video: Int, video: T): T?
     fun effacer(id_video: Int)
