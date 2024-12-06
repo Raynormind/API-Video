@@ -26,7 +26,7 @@ class VideosDAOImpl(private val bd: JdbcTemplate):VideosDAO {
         Video(réponse.getInt(1), réponse.getString("titre"), réponse.getString("description"), réponse.getString("miniature"), réponse.getString("fichier_video"), réponse.getDate("date_publication").toLocalDate(), réponse.getString("status"), Utilisateur(réponse.getInt(1), réponse.getString("nom"), réponse.getString("courriel"),réponse.getString("coordonnées")))
     }
 
-    override fun chercherParStatut(statut: String): List<Video> = bd.query("select * from Video v where v.status = ?"){ réponse, _ ->
+    override fun chercherParStatut(id_video: Int, status: String): List<Video> = bd.query("select * from Video v where v.id = ? and v.status = ?"){ réponse, _ ->
         Video(réponse.getInt(1), réponse.getString("titre"), réponse.getString("description"), réponse.getString("miniature"), réponse.getString("fichier_video"), réponse.getDate("date_publication").toLocalDate(), réponse.getString("status"), Utilisateur(réponse.getInt(1), réponse.getString("nom"), réponse.getString("courriel"),réponse.getString("coordonnées")))
     }
 

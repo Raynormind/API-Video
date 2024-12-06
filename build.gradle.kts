@@ -1,9 +1,11 @@
 plugins {
 	kotlin("jvm") version "1.9.25"
 	kotlin("plugin.spring") version "1.9.25"
-	id("org.springframework.boot") version "3.3.4"
-	id("io.spring.dependency-management") version "1.1.6"
+	id("org.springframework.boot") version "3.1.6"
+	id("io.spring.dependency-management") version "1.1.3"
+	
 }
+
 
 group = "com.projet"
 version = "0.0.1-SNAPSHOT"
@@ -22,10 +24,22 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("com.okta.spring:okta-spring-boot-starter:3.0.6")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+
 	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.security:spring-security-oauth2-resource-server")
+    implementation("org.springframework.security:spring-security-oauth2-jose")
+    implementation("org.springframework.security:spring-security-config")
+    implementation("org.springframework.security:spring-security-test")
+    
+
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
+	testImplementation("org.mockito:mockito-junit-jupiter:5.14.2")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
