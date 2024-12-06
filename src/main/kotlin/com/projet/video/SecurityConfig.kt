@@ -34,8 +34,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories
 public class SecurityConfig {
 
 	/*Code utilisateur jz
-	jacob@live.ca pw : Jacob12$
-	martine@gmail.com, pw : Martine12$
+	alice.martin@domaine.com pw : Jacob12$
+	bob.dupont@domaine.com, pw : Martine12$
 	luc@gmail.com, pw : Luc%*12$
 	lesly@gamil.com pw : Lesly12$ 
 	*/
@@ -45,7 +45,14 @@ public class SecurityConfig {
 	fun filterChain(http: HttpSecurity): SecurityFilterChain {
 		return http
 			.authorizeHttpRequests {
+				
 				it.requestMatchers("/videos").permitAll()
+				.requestMatchers(HttpMethod.PUT,"/videos/{id_video}").hasRole("USER")
+				.requestMatchers(HttpMethod.PUT,"/videos/{id_video}").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.POST,"/videos").hasRole("USER")
+				.requestMatchers(HttpMethod.POST,"/videos").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.DELETE,"/videos").hasRole("USER")
+				.requestMatchers(HttpMethod.DELETE,"/videos").hasRole("ADMIN")
 				.anyRequest().authenticated()
 			/* 	
 			authorizeRequests {

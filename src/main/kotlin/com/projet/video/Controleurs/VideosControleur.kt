@@ -41,7 +41,6 @@ class VideosController( private val videosService: VideosService ) {
         
     
     @PostMapping
-    @PreAuthorize("hasAuthority('create:videos')")
     fun creerVideo(@RequestBody video: Video, ): ResponseEntity<Video>{ 
         val nouvelleVideo =  videosService.ajouter(video)
         if( nouvelleVideo != null){
@@ -58,13 +57,11 @@ class VideosController( private val videosService: VideosService ) {
     } 
  
     @PutMapping("/{id_video}")
-    @PreAuthorize("hasAuthority('update:videos')")
     fun modifierVideo(@PathVariable id_video: Int, @RequestBody video: Video): ResponseEntity<Video> { 
         return ResponseEntity.ok( videosService.modifier(id_video, video))
     }
 
     @DeleteMapping("/{id_video}")
-    @PreAuthorize("hasAuthority('delete:videos')")
     fun supprimerVideo(@PathVariable id_video: Int): ResponseEntity<Video> {
         ResponseEntity.ok( videosService.effacer(id_video))
         return ResponseEntity.noContent().build()
