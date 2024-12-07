@@ -14,38 +14,35 @@ import org.springframework.http.ResponseEntity
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
-import org.springframework.security.access.prepost.PreAuthorize
 
 
 @RestController
 @RequestMapping("/videos")
-@CrossOrigin
 /*ModifierList*/
 class VideosController( private val videosService: VideosService ) {
 
 
     @GetMapping()
-    fun obtenirVideos() = videosService.chercherTous()
+    fun obtenirVideos() : ResponseEntity<List<Video>> = ResponseEntity.ok(videosService.chercherTous())
 
     @GetMapping("/{id_video}")
-    fun obtenirVideoParId(@PathVariable id_video:Int) = videosService.chercherParId( id_video )
+    fun obtenirVideoParId(@PathVariable id_video:Int) : ResponseEntity<Video> = ResponseEntity.ok(videosService.chercherParId( id_video ))
 
     @GetMapping("?titre={titre}")
-    fun obtenirVideoParRechercheTitre(@PathVariable titre: String) = videosService.chercherParTitre( titre )
+    fun obtenirVideoParRechercheTitre(@PathVariable titre: String) : ResponseEntity<List<Video>> = ResponseEntity.ok(videosService.chercherParTitre( titre ))
 
-    @GetMapping("/{id_video}/{status}")
-    fun obtenirStatutVideo(@PathVariable id_video: Int, @PathVariable status: String) = videosService.chercherParStatut( id_video, status )
+    @GetMapping("/{status}")
+    fun obtenirStatutVideo(@PathVariable status: String) : ResponseEntity<List<Video>> = ResponseEntity.ok( videosService.chercherParStatut( status ))
 
     @GetMapping("?auteur={nomAuteur}")
-    fun obtenirVideoParRechercheAuteur(@PathVariable auteur: Utilisateur) : ResponseEntity<List<Video>> = ResponseEntity.ok( videosService.chercherParAuteur( auteur ) )
+    fun obtenirVideoParRechercheAuteur(@PathVariable auteur: Utilisateur) : ResponseEntity<List<Video>> = ResponseEntity.ok( videosService.chercherParAuteur( auteur ))
         
-    
     @PostMapping
-    fun creerVideo(@RequestBody video: Video, ): ResponseEntity<Video>{ 
+    fun creerVideo(@RequestBody video: Video): ResponseEntity<Video>{ 
         val nouvelleVideo =  videosService.ajouter(video)
         if( nouvelleVideo != null){
             val uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{code}")
+                .path("/{auteur}")
                 .buildAndExpand(nouvelleVideo.auteur)
                 .toUri()
 
@@ -55,11 +52,9 @@ class VideosController( private val videosService: VideosService ) {
         return ResponseEntity.badRequest().build()
 
     } 
- 
+
     @PutMapping("/{id_video}")
-    fun modifierVideo(@PathVariable id_video: Int, @RequestBody video: Video): ResponseEntity<Video> { 
-        return ResponseEntity.ok( videosService.modifier(id_video, video))
-    }
+    fun modifierVideo(@PathVariable id_video: Int, @RequestBody video: Video): ResponseEntity<Video> = ResponseEntity.ok( videosService.modifier(id_video, video))
 
     @DeleteMapping("/{id_video}")
     fun supprimerVideo(@PathVariable id_video: Int): ResponseEntity<Video> {
