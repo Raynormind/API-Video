@@ -20,5 +20,8 @@ class GestionnaireExceptionsControleur() {
     fun gérerMauvaiseRequeteException(exception: MauvaiseRequeteException, requête: WebRequest): MessageErreur =
         MessageErreur(HttpStatus.BAD_REQUEST.value(), LocalDateTime.now(), exception.message, requête.getDescription(false))
 
-    
+    @ExceptionHandler(ConflitAvecUneRessourceExistanteException::class)
+    @ResponseStatus(code = HttpStatus.CONFLICT)
+    fun gérerConflitAvecUneRessourceExistanteException(exception: ConflitAvecUneRessourceExistanteException, requête: WebRequest): MessageErreur =
+        MessageErreur(HttpStatus.CONFLICT.value(), LocalDateTime.now(), exception.message, requête.getDescription(false))
 }
