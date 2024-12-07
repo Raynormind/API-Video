@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.query
 import com.projet.video.Modele.Video
 import com.projet.video.Modele.Utilisateur
 import com.projet.video.Exceptions.RessourceInexistanteException
+import com.projet.video.DAO.UtilisateursDAO
 
 @Repository
 class VideosDAOImpl(private val bd: JdbcTemplate, private val utilisateursDAO : UtilisateursDAO ):VideosDAO {

@@ -1,3 +1,5 @@
+package com.projet.video.Services
+
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -12,7 +14,6 @@ import com.projet.video.DAO.*
 import com.projet.video.Modele.*
 import com.projet.video.Controleurs.*
 import com.projet.video.Exceptions.*
-import com.projet.video.Services.*
 
 
 
@@ -88,7 +89,7 @@ class VideosServiceTests {
         fichiervideo = "video6.mp4", 
         datePublication = LocalDate.parse("2023-01-06"),
         status = "public", 
-        auteur =a3)
+        auteur = a3)
     
     val v7 = Video(id_video = 7,
         titre = "Histoire des Civilisations", 
@@ -97,10 +98,10 @@ class VideosServiceTests {
         fichiervideo = "video7.mp4", 
         datePublication = LocalDate.parse("2023-01-07"),
         status = "privé", 
-        auteur =a3)
+        auteur = a3)
 
     @Test
-	fun `Étant donné un admin recherchant tous les videos, lorsqu'on récupère tous les videos on obtient, les même sept videos`(){
+	fun `Étant donné un admin recherchant toutes les videos, lorsqu'on récupère tous les videos on obtient, les même sept videos`(){
 
 		//Mise en place
 		val résultat_attendu = listOf<Video>( v1, v2, v3 ,v4, v5, v6, v7 )
@@ -110,10 +111,34 @@ class VideosServiceTests {
 		val serviceTest = VideosService(videosDAO = mockDAO)
 
 		//Action
-		val résultat_observé = serviceTest.obtenirVideos()
+		val résultat_observé = serviceTest.chercherTous()
 
 		//Vérification
 		assertEquals( résultat_attendu, résultat_observé )
 	}
+
+    @Test
+	fun `Étant donné une video d'ID 1 lorsqu'on cherche la video par ID, on obtient la video complète`(){
+		Mockito.doReturn( v1 ).`when`( mockDAO ).chercherParId( 1 )
+		val cobaye = VideosService( mockDAO )
+
+		val résultat_obtenu = cobaye.chercherParId( 1 )
+
+		val résultat_attendu = v1
+		
+		assertEquals( résultat_attendu, résultat_obtenu )
+	}
+
+	@Test
+	fun `Étant donné une banque de videos, lorsqu'on cherche une video avec un identifiant non existant, on obtient une RessourceInexistanteException`(){
+		Mockito.doReturn( null ).`when`( mockDAO ).chercherParId( 215 )
+
+		val cobaye = VideosService( mockDAO )
+
+		assertFailsWith( RessourceInexistanteException::class ) {
+			cobaye.chercherParId( 215 )
+		}
+	}
+
 
 }

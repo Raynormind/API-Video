@@ -12,6 +12,7 @@ import com.projet.video.Exceptions.RessourceInexistanteException
 import com.projet.video.Exceptions.MauvaiseRequeteException
 import com.projet.video.Exceptions.ConflitAvecUneRessourceExistanteException
 
+
 @Service
 class VideosService(private val videosDAO: VideosDAO, private val utilisateursDAO: UtilisateursDAO){
     @Secured("ROLE_ADMIN")
@@ -25,19 +26,24 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
 
         return video
     }
-
+    @PreAuthorize("hasRole('USER')")
     fun chercherParTitre(titre: String): List<Video> = videosDAO.chercherParTitre(titre)
-    fun chercherParStatut(status: String): List<Video> = videosDAO.chercherParStatut(status)
+    fun chercherParStatut(status: String): List<Video> {
+        val videos = videosDAO.chercherParStatut(status)
 
-    fun chercherParAuteur(auteur: Utilisateur): List<Video> = videosDAO.chercherParAuteur(auteur){
-        vide
+        if ( videos == null ) throw RessourceInexistanteException("Aucunes videos ne font partis du status $status recherché.")
+
+        return videos
     }
+
+    fun chercherParAuteur(auteur: Utilisateur): List<Video> = videosDAO.chercherParAuteur(auteur)
+
     @PreAuthorize("hasRole('USER') || hasRole('ADMIN')")
     fun ajouter(video: Video): Video {
-        if(videosDAO.chercherParTitre(video.titre) != null ) throw ConflitAvecUneRessourceExistanteException("Il existe déjà une équipe avec le nom ${video.titre}.")
+        if(videosDAO.chercherParTitre(video.titre) != null ) throw ConflitAvecUneRessourceExistanteException("Il existe déjà une video avec le nom ${video.titre}.")
         val nouvelleVideo = videosDAO.ajouter(video)
         
-        if(nouvelleVideo == null) throw MauvaiseRequeteException("L'équipe ${video.titre} n'a pas pu être créée.")
+        if(nouvelleVideo == null) throw MauvaiseRequeteException("La video ${video.titre} n'a pas pu être créée.")
 
         return nouvelleVideo
     }
