@@ -1,67 +1,75 @@
 
 
 
+
+
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.http.HttpMethod
+import org.springframework.security.config.annotation.web.invoke
+import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator
+import org.springframework.security.oauth2.core.OAuth2TokenValidator
+import org.springframework.security.oauth2.jwt.JwtValidators
+import org.springframework.security.oauth2.jwt.JwtDecoder
+import org.springframework.security.oauth2.jwt.*
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.boot.autoconfigure.security.SecurityProperties
-import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.ProviderManager
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
-import org.springframework.security.config.web.server.ServerHttpSecurity.http
-import org.springframework.security.core.userdetails.User
-import org.springframework.security.core.userdetails.UserDetailsService
-import org.springframework.security.crypto.factory.PasswordEncoderFactories
-import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.config.Customizer.withDefaults
+import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider
+import org.springframework.security.authentication.ProviderManager
+import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.core.userdetails.User
+import org.springframework.security.provisioning.InMemoryUserDetailsManager
+import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.crypto.factory.PasswordEncoderFactories
+
+
 
 @Configuration
+@EnableMethodSecurity(prePostEnabled = true)
+
 public class SecurityConfig {
 
-    @Bean
+	/*Code utilisateur jz
+	alice.martin@domaine.com pw : Jacob12$
+	bob.dupont@domaine.com, pw : Martine12$
+	luc@gmail.com, pw : Luc%*12$
+	lesly@gamil.com pw : Lesly12$ 
+	*/
+
+	@Bean
+	@throw(Exception::class)
 	fun filterChain(http: HttpSecurity): SecurityFilterChain {
-		http
+		return http
 			.authorizeHttpRequests {
-				authorize -> authorize.anyRequest().authenticated()
+				
+				it.requestMatchers("/videos").permitAll()
+				.requestMatchers(HttpMethod.PUT,"/videos/{id_video}").hasRole("USER")
+				.requestMatchers(HttpMethod.PUT,"/videos/{id_video}").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.POST,"/videos").hasRole("USER")
+				.requestMatchers(HttpMethod.POST,"/videos").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.DELETE,"/videos").hasRole("USER")
+				.requestMatchers(HttpMethod.DELETE,"/videos").hasRole("ADMIN")
+				.anyRequest().authenticated()
+			/* 	
+			authorizeRequests {
+				authorize("/videos", permitAll)
+				authorize("/videos/private", authenticated)
+				authorize("/videos?auteur={nomAuteur}", hasAuthority("SCOPE_read:videos"))
+				authorize("/videos", hasAuthority("SCOPE_write:videos"))
+				authorize("/videos/{id_video}", hasAuthority("SCOPE_update:videos"))
+				authorize("/videos/{id_video}", hasAuthority("SCOPE_delete:videos"))
 			}
-			.httpBasic { }
-			.authenticationManager(authenticationManager())
-
-		return http.build()
-	}
-
-    @Bean
-	fun authenticationManager(): AuthenticationManager {
-		val authenticationProvider = DaoAuthenticationProvider()
-		authenticationProvider.setUserDetailsService(userDetailsService())
-		authenticationProvider.setPasswordEncoder(passwordEncoder())
-
-		val providerManager = ProviderManager(authenticationProvider)
-		providerManager.isEraseCredentialsAfterAuthentication = false
-
-		return providerManager
-	}
-
-    private fun userDetailsService(): UserDetailsService {
-		val users = User.withDefaultPasswordEncoder()
-		val user = users
-			.username("Bob")
-			.password("password")
-			.roles("USER")
+		*/	
+			}
+			.cors(withDefaults())
+			.oauth2ResourceServer { oauth2 ->
+                oauth2 .jwt(withDefaults())
+			}
 			.build()
-		val admin = users
-			.username("admin")
-			.password("password")
-			.roles("USER", "ADMIN")
-			.build()
-
-		return InMemoryUserDetailsManager(user, admin)
 	}
-
-	private fun passwordEncoder(): PasswordEncoder {
-		return PasswordEncoderFactories.createDelegatingPasswordEncoder()
-	}
+		
 }
