@@ -26,7 +26,7 @@ class VideosController( private val videosService: VideosService ) {
     fun obtenirVideos() = videosService.chercherTous()
 
     @GetMapping("/{id_video}")
-    fun obtenirUneVideoUtilisateur(@PathVariable id_video:Int) = videosService.chercherParId( id_video )
+    fun obtenirVideoParId(@PathVariable id_video:Int) = videosService.chercherParId( id_video )
 
     @GetMapping("?titre={titre}")
     fun obtenirVideoParRechercheTitre(@PathVariable titre: String) = videosService.chercherParTitre( titre )
