@@ -7,7 +7,6 @@ API partage de vidéo Tutoriel.
 Le collège souhaite mettre en place une plateforme pour la création et le partage de vidéo tutoriel
 accessible pour tous.
 
-
 ## Description du projet
 L'application est une API publique qui permet à tous de consulter la liste des vidéos publier par des utilisateurs et de recherché une vidéo par son nom afin de visioner la vidéo.
 
@@ -26,6 +25,7 @@ Exemples d'utilisation du projet (à venir)
 
 ## Auteurs
 Lesly-Junior Gourdet
+
 Jacob Zapitoski
 
 ## Licence
