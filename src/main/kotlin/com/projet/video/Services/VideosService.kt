@@ -29,9 +29,9 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
     fun chercherParTitre(titre: String): List<Video> = videosDAO.chercherParTitre(titre)
     fun chercherParStatut(status: String): List<Video> = videosDAO.chercherParStatut(status)
 
-    fun chercherParAuteur(auteur: Utilisateur): List<Video> = videosDAO.chercherParAuteur(auteur){
-        vide
-    }
+    fun chercherParAuteur(auteur: Utilisateur): List<Video> = videosDAO.chercherParAuteur(auteur)
+      
+   
     @PreAuthorize("hasRole('USER') || hasRole('ADMIN')")
     fun ajouter(video: Video): Video {
         if(videosDAO.chercherParTitre(video.titre) != null ) throw ConflitAvecUneRessourceExistanteException("Il existe déjà une équipe avec le nom ${video.titre}.")
