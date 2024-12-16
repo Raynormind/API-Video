@@ -40,7 +40,7 @@ class VideosController( private val videosService: VideosService ) {
     @GetMapping("?auteur={nomAuteur}")
     fun obtenirVideoParRechercheAuteur(@PathVariable auteur: Utilisateur) : ResponseEntity<List<Video>> = ResponseEntity.ok( videosService.chercherParAuteur( auteur ))
         
-    @PostMapping(params = ["courriel"])
+    @PostMapping()
     fun creerVideo(@RequestBody video: Video, @AuthenticationPrincipal jeton: Jwt): ResponseEntity<Video>{ 
         
         val nouvelleVideo =  videosService.ajouter(video, jeton.claims["courriel"] as? String?)

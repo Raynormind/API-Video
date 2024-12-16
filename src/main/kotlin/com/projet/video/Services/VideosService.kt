@@ -50,7 +50,7 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
             throw OperationNonAutoriseeException("Votre jeton d'accès ne contient pas les éléments nécesssaires à la création d'une video")
         }
     
-        if(videosDAO.chercherParTitre(video.titre).get(0).titre != video.titre ){ 
+        if(videosDAO.chercherParTitreUnique(video.titre)?.titre == video.titre ){ 
             throw ConflitAvecUneRessourceExistanteException("Il existe déjà une video avec le titre ${video.titre}.")
         }
         
