@@ -14,6 +14,10 @@ class UtilisateursDAOImpl(private val bd: JdbcTemplate): UtilisateursDAO {
         Utilisateur(réponse.getInt(1), réponse.getString("nom"), réponse.getString("courriel"), réponse.getString("coordonnées"))
     }.singleOrNull()
 
+    override fun chercherParCourriel(courriel: String): Utilisateur? = bd.query("select * from Video v where v.courriel = ?") { réponse, _ ->
+        Utilisateur(réponse.getInt(1), réponse.getString("nom"), réponse.getString("courriel"), réponse.getString("coordonnées"))
+    }.singleOrNull()
+
     override fun chercherTous(): List<Utilisateur> {throw UnsupportedOperationException() }
 
     override fun chercherParTitre(titre: String): List<Utilisateur> { throw UnsupportedOperationException() }
