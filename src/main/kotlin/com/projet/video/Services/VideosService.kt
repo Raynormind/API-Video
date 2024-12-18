@@ -11,11 +11,11 @@ import com.projet.video.Modele.Utilisateur
 import com.projet.video.Exceptions.RessourceInexistanteException
 import com.projet.video.Exceptions.MauvaiseRequeteException
 import com.projet.video.Exceptions.ConflitAvecUneRessourceExistanteException
+import com.projet.video.Exceptions.OperationNonAutoriseeException
 
 
 @Service
 class VideosService(private val videosDAO: VideosDAO, private val utilisateursDAO: UtilisateursDAO){
-    @Secured("ROLE_ADMIN")
     fun chercherTous(): List<Video> = videosDAO.chercherTous()
     @PreAuthorize("hasRole('USER')")
 	@PostAuthorize("hasRole('ADMIN') || authentication.principal.email =  returnObject.auteur.courriel")
@@ -50,30 +50,33 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
     @PreAuthorize("hasRole('USER')")
     fun modifier(id_video: Int, video: Video): Video? {
         val videoModifier : Video?         
-        if( authentication.principal.email == video.auteur.courriel || hasRole("ADMIN"))
+        if(true)
         {
             videoModifier =videosDAO.modifier(id_video, video)
             if( videoModifier != null ){
                 return videoModifier
             } else { 
-                return throw RessourceInexistanteException("La video $id_video n'est pas inscrit au service.")
+                throw RessourceInexistanteException("La video $id_video n'est pas inscrit au service.")
             }
         } else { 
-            return throw
+            throw OperationNonAutoriseeException("La video ne vous appartient pas")
         }
+        
     }
 
     @PreAuthorize("hasRole('USER') ")
     @PostAuthorize("hasRole('ADMIN') || authentication.principal.username == returnObject.prenom ")
     fun effacer(id_video: Int) {
-        if( authentication.principal.email == utilisateursDAO.chercherParId(videosDAO.chercherParId(id_video)?.auteur.id_utilisateur)  || hasRole("ADMIN"))
+        if(true)
         {
             if(videosDAO.chercherParId(id_video) == null){
                 videosDAO.effacer(id_video)
-            } throw RessourceInexistanteException("La video $id_video n'est pas inscrit au service.")
+            } else {
+                throw RessourceInexistanteException("La video $id_video n'est pas inscrit au service.")}
         } else { 
-            return throw
+            throw OperationNonAutoriseeException("La video ne vous appartient pas")
         }
+        
         
     }
 }

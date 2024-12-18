@@ -1,4 +1,4 @@
-
+package com.projet.video
 
 
 
@@ -41,7 +41,7 @@ public class SecurityConfig {
 	*/
 
 	@Bean
-	@throw(Exception::class)
+	@Throws(Exception::class)
 	fun filterChain(http: HttpSecurity): SecurityFilterChain {
 		return http
 			.authorizeHttpRequests {

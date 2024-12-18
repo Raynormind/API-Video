@@ -24,4 +24,9 @@ class GestionnaireExceptionsControleur() {
     @ResponseStatus(code = HttpStatus.CONFLICT)
     fun gérerConflitAvecUneRessourceExistanteException(exception: ConflitAvecUneRessourceExistanteException, requête: WebRequest): MessageErreur =
         MessageErreur(HttpStatus.CONFLICT.value(), LocalDateTime.now(), exception.message, requête.getDescription(false))
+
+    @ExceptionHandler(OperationNonAutoriseeException::class)
+    @ResponseStatus(code = HttpStatus.FORBIDDEN)
+    fun gérerOperationNonAutoriseeException(exception: OperationNonAutoriseeException, requête: WebRequest): MessageErreur =
+        MessageErreur(HttpStatus.FORBIDDEN.value(), LocalDateTime.now(), exception.message, requête.getDescription(false))
 }

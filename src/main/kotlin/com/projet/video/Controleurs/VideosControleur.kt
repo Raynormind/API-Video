@@ -22,7 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 class VideosController( private val videosService: VideosService ) {
 
 
-    @GetMapping()
+    @GetMapping("/")
     fun obtenirVideos() : ResponseEntity<List<Video>> = ResponseEntity.ok(videosService.chercherTous())
 
     @GetMapping("/{id_video}")
