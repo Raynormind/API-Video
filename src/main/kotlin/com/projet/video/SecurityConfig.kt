@@ -47,12 +47,9 @@ public class SecurityConfig {
 			.authorizeHttpRequests {
 				
 				it.requestMatchers("/videos").permitAll()
-				.requestMatchers(HttpMethod.PUT,"/videos/{id_video}").hasRole("USER")
-				.requestMatchers(HttpMethod.PUT,"/videos/{id_video}").hasRole("ADMIN")
-				.requestMatchers(HttpMethod.POST,"/videos").hasRole("USER")
-				.requestMatchers(HttpMethod.POST,"/videos").hasRole("ADMIN")
-				.requestMatchers(HttpMethod.DELETE,"/videos").hasRole("USER")
-				.requestMatchers(HttpMethod.DELETE,"/videos").hasRole("ADMIN")
+				.requestMatchers("/videos/{id_video}").hasAuthority("SCOPE_update:videos")
+				.requestMatchers("/videos").hasAuthority("SCOPE_write:videos")
+				.requestMatchers("/videos").hasAuthority("SCOPE_delete:videos")
 				.anyRequest().authenticated()
 			/* 	
 			authorizeRequests {
@@ -67,7 +64,7 @@ public class SecurityConfig {
 			}
 			.cors(withDefaults())
 			.oauth2ResourceServer { oauth2 ->
-                oauth2 .jwt(withDefaults())
+                oauth2.jwt(withDefaults())
 			}
 			.build()
 	}
