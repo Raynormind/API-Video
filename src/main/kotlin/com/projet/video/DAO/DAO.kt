@@ -1,6 +1,8 @@
 package com.projet.video.DAO
 
 import com.projet.video.Modele.Utilisateur
+import org.springframework.security.oauth2.jwt.Jwt
+
 
 interface DAO<T> {
     fun chercherTous(): List<T>
@@ -10,7 +12,7 @@ interface DAO<T> {
     fun chercherParTitre(titre: String): List<T>
     fun chercherParAuteur(auteur: Utilisateur): List<T>
     fun chercherParStatut(status: String): List<T>
-    fun ajouter(video: T): T?
+    fun ajouter(video: T, jeton: Jwt): T?
     fun modifier(id_video: Int, video: T): T?
     fun effacer(id_video: Int)
 }

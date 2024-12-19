@@ -20,15 +20,15 @@ import org.springframework.security.oauth2.jwt.Jwt
 
 
 @RestController
-@RequestMapping("/videos")
-class VideosControleur( private val videosService: VideosService ) {
+@RequestMapping("/utilisateurs")
+class UtilisateursControleur( private val videosService: VideosService ) {
 
 
     @GetMapping("/")
-    fun obtenirVideos() : ResponseEntity<List<Video>> = ResponseEntity.ok(videosService.chercherTous())
+    fun obtenirUtilisateurs() : ResponseEntity<List<Video>> = ResponseEntity.ok(videosService.chercherTous())
 
-    @GetMapping("/{id_video}")
-    fun obtenirVideoParId(@PathVariable id_video:Int) : ResponseEntity<Video> = ResponseEntity.ok(videosService.chercherParId( id_video ))
+    @GetMapping("/{id_utilisateur}")
+    fun obtenirUtilisateurParId(@PathVariable id_video:Int) : ResponseEntity<Video> = ResponseEntity.ok(videosService.chercherParId( id_video ))
 
     @GetMapping("?titre={titre}")
     fun obtenirVideoParRechercheTitre(@PathVariable titre: String) : ResponseEntity<List<Video>> = ResponseEntity.ok(videosService.chercherParTitre( titre ))
@@ -38,27 +38,5 @@ class VideosControleur( private val videosService: VideosService ) {
 
     @GetMapping("?auteur={nomAuteur}")
     fun obtenirVideoParRechercheAuteur(@PathVariable auteur: Utilisateur) : ResponseEntity<List<Video>> = ResponseEntity.ok( videosService.chercherParAuteur( auteur ))
-        
-    @PostMapping()
-    fun creerVideo(@RequestBody video: Video, @AuthenticationPrincipal jeton: Jwt): ResponseEntity<Video>{ 
-        
-        val nouvelleVideo =  videosService.ajouter(video, jeton)
-        
-        val uri = ServletUriComponentsBuilder
-            .fromCurrentRequest()
-            .path("/{auteur}")
-            .buildAndExpand(nouvelleVideo.auteur)
-            .toUri()
-        return ResponseEntity.created(uri).body(nouvelleVideo)
-    } 
-
-    @PutMapping("/{id_video}")
-    fun modifierVideo(@PathVariable id_video: Int, @RequestBody video: Video, @AuthenticationPrincipal jeton: Jwt): ResponseEntity<Video> = ResponseEntity.ok( videosService.modifier(id_video, video, jeton))
-
-    @DeleteMapping("/{id_video}")
-    fun supprimerVideo(@PathVariable id_video: Int, @AuthenticationPrincipal jeton: Jwt): ResponseEntity<Video> {
-        ResponseEntity.ok( videosService.effacer(id_video, jeton))
-        return ResponseEntity.noContent().build()
-    } 
     
 }

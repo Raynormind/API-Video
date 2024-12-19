@@ -3,6 +3,7 @@ package com.projet.video.DAO
 import org.springframework.stereotype.Repository
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.query
+import org.springframework.security.oauth2.jwt.Jwt
 
 import com.projet.video.Modele.Utilisateur
 
@@ -28,7 +29,7 @@ class UtilisateursDAOImpl(private val bd: JdbcTemplate): UtilisateursDAO {
 
     override fun chercherParStatut(status: String): List<Utilisateur> {throw UnsupportedOperationException() }
 
-    override fun ajouter(video: Utilisateur): Utilisateur? { throw UnsupportedOperationException()}
+    override fun ajouter(video: Utilisateur, jeton: Jwt): Utilisateur? { throw UnsupportedOperationException()}
 
     override fun modifier(id_video: Int, video: Utilisateur): Utilisateur? { throw UnsupportedOperationException() }
 

@@ -2,13 +2,13 @@
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS pnomLeslyJacobVideodb DEFAULT CHARACTER SET utf8 ;
-USE pnomLeslyJacobVideodb ;
+CREATE SCHEMA IF NOT EXISTS lgourdetLeslyJacobVideodb DEFAULT CHARACTER SET utf8 ;
+USE lgourdetLeslyJacobVideodb ;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Utilisateur`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS pnomLeslyJacobVideodb.Utilisateur (
+CREATE TABLE IF NOT EXISTS lgourdetLeslyJacobVideodb.Utilisateur (
   idUtilisateur INT NOT NULL,
   nom VARCHAR(45) NOT NULL,
   courriel VARCHAR(45) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS pnomLeslyJacobVideodb.Utilisateur (
 -- -----------------------------------------------------
 -- Table `mydb`.`Video`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS pnomLeslyJacobVideodb.Video (
+CREATE TABLE IF NOT EXISTS lgourdetLeslyJacobVideodb.Video (
   idVideo INT NOT NULL AUTO_INCREMENT,
   titre VARCHAR(60) NOT NULL,
   description VARCHAR(500),
@@ -34,10 +34,6 @@ CREATE TABLE IF NOT EXISTS pnomLeslyJacobVideodb.Video (
   INDEX fk_Video_Utilisateur_idx (auteur ASC),
   CONSTRAINT fk_Video_Utilisateur
     FOREIGN KEY (auteur)
-    REFERENCES LeslyJacobVideodb.Utilisateur (idUtilisateur)
+    REFERENCES lgourdetLeslyJacobVideodb.Utilisateur(idUtilisateur)
     ON DELETE NO ACTION
-    ON UPDATE  CASCADE);
-
-
-
-
+    ON UPDATE CASCADE);

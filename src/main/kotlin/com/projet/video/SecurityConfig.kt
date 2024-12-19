@@ -46,10 +46,10 @@ public class SecurityConfig {
 		return http
 			.authorizeHttpRequests {
 				
-				it.requestMatchers("/videos").permitAll()
-				.requestMatchers("/videos/{id_video}").hasAuthority("SCOPE_update:videos")
-				.requestMatchers("/videos").hasAuthority("SCOPE_write:videos")
-				.requestMatchers("/videos").hasAuthority("SCOPE_delete:videos")
+				it.requestMatchers("/").permitAll()
+				//.requestMatchers("/videos/{id_video}").hasAuthority("SCOPE_update:videos")
+				//.requestMatchers("/videos").hasAuthority("SCOPE_write:videos")
+				//.requestMatchers("/videos").hasAuthority("SCOPE_delete:videos")
 				.anyRequest().authenticated()
 			/* 	
 			authorizeRequests {
