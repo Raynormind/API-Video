@@ -41,7 +41,7 @@ class VideosDAOImpl(private val bd: JdbcTemplate, private val utilisateursDAO : 
     override fun ajouter(video: Video, jeton: Jwt): Video? {
         val courriel = jeton.claims["courriel"]
 
-        video.auteur.courriel == courriel
+        video.auteur = utilisateursDAO.chercherParCourriel(courriel.toString())!!
         
         val réponse = bd.update("insert into Video(titre, description, miniature, fichier_video, date_publication, status, auteur) values(?, ?, ?, ?, ?, ?, ?)", video.titre, video.description, video.miniature, video.fichiervideo, video.datePublication, video.status, video.auteur.id_utilisateur)
 

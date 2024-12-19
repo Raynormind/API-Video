@@ -55,7 +55,7 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
     @PreAuthorize("hasAuthority('write:videos')")
     fun ajouter(video: Video, jeton: Jwt): Video {
         val courrielAuthentification = jeton.claims["courriel"] as? String ?: throw OperationNonAutoriseeException("Votre jeton d'accès ne contient pas les éléments nécesssaires à la création d'une vidéo")
-    
+        
         if(videosDAO.chercherParTitreUnique(video.titre)?.titre == video.titre ){ 
             throw ConflitAvecUneRessourceExistanteException("Il existe déjà une video avec le titre ${video.titre}.")
         }

@@ -5,7 +5,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import org.mockito.Mock
-import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.kotlin.description
@@ -169,7 +168,6 @@ class VideosServiceTests {
 		assertEquals( résultat_attendu.get(0), résultat_obtenu.get(0) )
 	}
  
-    @WithMockJwt( nom = "bob" )
     @Test
 	fun `Étant donné un utilisateur authentifié etune vidéo, lorsqu'on ajoute une video, on obtient la nouvelle video`(){
 		

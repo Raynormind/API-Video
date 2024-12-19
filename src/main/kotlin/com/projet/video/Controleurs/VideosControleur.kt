@@ -33,7 +33,7 @@ class VideosControleur( private val videosService: VideosService ) {
     @GetMapping("?titre={titre}")
     fun obtenirVideoParRechercheTitre(@PathVariable titre: String) : ResponseEntity<List<Video>> = ResponseEntity.ok(videosService.chercherParTitre( titre ))
 
-    @GetMapping("/{status}")
+    @GetMapping("/status/{status}")
     fun obtenirStatutVideo(@PathVariable status: String) : ResponseEntity<List<Video>> = ResponseEntity.ok( videosService.chercherParStatut( status ))
 
     @GetMapping("?auteur={nomAuteur}")
@@ -46,8 +46,8 @@ class VideosControleur( private val videosService: VideosService ) {
         
         val uri = ServletUriComponentsBuilder
             .fromCurrentRequest()
-            .path("/{auteur}")
-            .buildAndExpand(nouvelleVideo.auteur)
+            .path("/{id_video}")
+            .buildAndExpand(nouvelleVideo.id_video)
             .toUri()
         return ResponseEntity.created(uri).body(nouvelleVideo)
     } 
