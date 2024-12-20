@@ -20,7 +20,21 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal
 @Service
 class VideosService(private val videosDAO: VideosDAO, private val utilisateursDAO: UtilisateursDAO){
     
-    fun chercherTous(): List<Video> = videosDAO.chercherTous()
+    fun chercherTous(listpermission : ArrayList<String>, courriel: String?): List<Video>{
+        if(listpermission.contains("read:videos")){
+           return videosDAO.chercherTous()
+        } else {
+            if(courriel != null){
+                val util = utilisateursDAO.chercherParCourriel(courriel)
+                if ( util != null ){
+                    return videosDAO.chercherParAuteur(util.id_utilisateur)
+                }
+            }
+
+            throw OperationNonAutoriseeException("Vous ne possédez pas les droits ou vous ne possédez aucune vidéos")
+        }
+    }
+
     
     fun chercherParId(id_video: Int): Video {
         val video = videosDAO.chercherParId(id_video)

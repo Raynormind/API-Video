@@ -26,7 +26,9 @@ class VideosController( private val videosService: VideosService ) {
 
 
     @GetMapping()
-    fun obtenirVideos() : ResponseEntity<List<Video>> = ResponseEntity.ok(videosService.chercherTous())
+    fun obtenirVideos(@AuthenticationPrincipal jeton: Jwt) : ResponseEntity<List<Video>> = ResponseEntity.ok(videosService.chercherTous(jeton.claims["permissions"] as ArrayList<String>, jeton.claims["courriel"] as? String?))
+
+
 
     @GetMapping("/{id_video}")
     fun obtenirVideoParId(@PathVariable id_video:Int) : ResponseEntity<Video> = ResponseEntity.ok(videosService.chercherParId( id_video ))
