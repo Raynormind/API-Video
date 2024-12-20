@@ -169,7 +169,7 @@ class VideosServiceTests {
 	}
  
     @Test
-	fun `Étant donné un utilisateur authentifié etune vidéo, lorsqu'on ajoute une video, on obtient la nouvelle video`(){
+	fun `Étant donné un utilisateur authentifié et une vidéo, lorsqu'on ajoute une video, on obtient la nouvelle video`(){
 		
         val nouvelleVideo =Video(
             id_video = 0,
@@ -195,7 +195,7 @@ class VideosServiceTests {
 
         val userCourriel = "jacobz@live.ca"
        
-        Mockito.`when`(mockvideoDAO.chercherParTitre("Histoire des Civilisatio")).thenReturn( listOf(nouvelleVideo, v8, v7) )
+        Mockito.`when`(mockvideoDAO.chercherParTitreUnique("Histoire des Civilisatio")).thenReturn( null )
         Mockito.`when`(mockUserDAO.chercherParCourriel(userCourriel)).thenReturn(a1)
         Mockito.`when`(mockvideoDAO.ajouter(nouvelleVideo)).thenReturn(résultat_attendu)
         
@@ -210,9 +210,20 @@ class VideosServiceTests {
 	}
 
     @Test
-	fun `Étant donné un utilisateur authentifié et une vidéo existante , lorsqu'on ajoute la video, on obtient une ConflitAvecUneRessourceExistanteException`(){
+	fun `Étant donné un admin authentifié et une vidéo existante , lorsqu'on ajoute la video, on obtient une ConflitAvecUneRessourceExistanteException`(){
 		
         val nouvelleVideo = Video(
+            id_video = 0,
+            titre = "Histoire des Civilisatio", 
+            description = "Recettes et astuces culinaires.", 
+            miniature = "miniature9.jpg",
+            fichiervideo = "video9.mp4", 
+            datePublication = LocalDate.parse("2023-01-29"),
+            status = "public", 
+            auteur = a1
+        )
+
+        val VideoExistante = Video(
             id_video = 0,
             titre = "Histoire des Civilisatio", 
             description = "Recettes et astuces culinaires.", 
@@ -225,7 +236,7 @@ class VideosServiceTests {
     
         val usercourriel = "jacobz@live.ca"
        
-        Mockito.`when`(mockvideoDAO.chercherParTitre("Histoire des Civilisatio")).thenReturn( listOf(v8, v7))
+        Mockito.`when`(mockvideoDAO.chercherParTitreUnique(nouvelleVideo.titre)).thenReturn(VideoExistante)
 		val cobaye = VideosService( mockvideoDAO, mockUserDAO  )
        
 
@@ -269,14 +280,13 @@ class VideosServiceTests {
             auteur = a1
         )
 
-        val résultat_attendu = null
 
         val userCourriel = "jacobz@live.ca"
        
-        Mockito.`when`(mockvideoDAO.chercherParTitre("Histoire des Civilisatio")).thenReturn( listOf(nouvelleVideo, v8, v7) )
+        Mockito.`when`(mockvideoDAO.chercherParTitre("Histoire des Civilisatio")).thenReturn( null )
         Mockito.`when`(mockUserDAO.chercherParCourriel(userCourriel)).thenReturn(a1)
-        Mockito.`when`(mockvideoDAO.ajouter(nouvelleVideo)).thenReturn(résultat_attendu)
-        
+        Mockito.`when`(mockvideoDAO.ajouter(nouvelleVideo)).thenReturn( null )
+  
 
 		val cobaye = VideosService( mockvideoDAO, mockUserDAO  )
       
@@ -307,12 +317,10 @@ class VideosServiceTests {
 
 		val cobaye = VideosService( mockvideoDAO, mockUserDAO  )
       
-		cobaye.modifier(idVideo, videoAModifier, userCourriel)
 		
        
-
 		assertFailsWith( RessourceInexistanteException::class ) {
-			cobaye.modifier(idVideo, videoAModifier, userCourriel)
+			cobaye.modifier(idVideo, videoAModifier, userCourriel, arrayListOf("update:videos"))
 		}
 	}
 
@@ -334,17 +342,14 @@ class VideosServiceTests {
          val userCourriel = "x"
        
        
-        Mockito.`when`(mockvideoDAO.modifier(idVideo, videoAModifier)).thenReturn( null )
+        
         
 
 		val cobaye = VideosService( mockvideoDAO, mockUserDAO  )
       
-		val résultat_observé = cobaye.modifier(idVideo, videoAModifier, userCourriel)
-		
-        
 
 		assertFailsWith( OperationNonAutoriseeException::class ) {
-			cobaye.modifier(idVideo, videoAModifier, userCourriel)
+			cobaye.modifier(idVideo, videoAModifier, userCourriel, arrayListOf("update:videos"))
 		}
 	}
 
@@ -378,7 +383,7 @@ class VideosServiceTests {
 
 		val cobaye = VideosService( mockvideoDAO, mockUserDAO  )
       
-		val résultat_observé = cobaye.modifier(idVideo, videoAModifier, userCourriel)
+		val résultat_observé = cobaye.modifier(idVideo, videoAModifier, userCourriel, arrayListOf("update:videos"))
 		
         assert(résultat_attendu.equals(résultat_observé))
         

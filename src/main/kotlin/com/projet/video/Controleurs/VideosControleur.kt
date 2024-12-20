@@ -54,11 +54,19 @@ class VideosController( private val videosService: VideosService ) {
     } 
 
     @PutMapping("/{id_video}")
-    fun modifierVideo(@PathVariable id_video: Int, @RequestBody video: Video, @AuthenticationPrincipal jeton: Jwt): ResponseEntity<Video> = ResponseEntity.ok( videosService.modifier(id_video, video, jeton.claims["courriel"] as? String?))
+    fun modifierVideo(@PathVariable id_video: Int, @RequestBody video: Video, @AuthenticationPrincipal jeton: Jwt): ResponseEntity<Video> {
+        if(videosService.chercherParId(id_video) != null){
+            
+            val videoMAJ = videosService.modifier(id_video, video, jeton.claims["courriel"] as? String?, jeton.claims["permissions"] as ArrayList<String>)
+            return ResponseEntity.ok(videoMAJ)
+        } else {
+            return creerVideo(video, jeton)
+        }
+    } 
 
     @DeleteMapping("/{id_video}")
     fun supprimerVideo(@PathVariable id_video: Int, @AuthenticationPrincipal jeton: Jwt): ResponseEntity<Video> {
-        ResponseEntity.ok( videosService.effacer(id_video, jeton))
+        videosService.effacer(id_video, jeton.claims["courriel"] as? String?, jeton.claims["permissions"] as ArrayList<String>)
         return ResponseEntity.noContent().build()
     } 
     

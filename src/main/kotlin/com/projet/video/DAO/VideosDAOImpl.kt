@@ -17,7 +17,7 @@ class VideosDAOImpl(private val bd: JdbcTemplate, private val utilisateursDAO : 
     
     override fun chercherParCourriel(courriel: String): Video?{throw UnsupportedOperationException()}
 
-    override fun chercherParId(id_video: Int): Video? = bd.query("select * from Video v, Utilisateur u where u.idUtilisateur = v.auteur && v.id = ?", id_video) { réponse, _ ->
+    override fun chercherParId(id_video: Int): Video? = bd.query("select * from Video v, Utilisateur u where u.idUtilisateur = v.auteur && v.idVideo = ?", id_video) { réponse, _ ->
         Video(réponse.getInt(1), réponse.getString("titre"), réponse.getString("description"), réponse.getString("miniature"), réponse.getString("fichier_video"), réponse.getDate("date_publication").toLocalDate(), réponse.getString("status"), Utilisateur(réponse.getInt(1), réponse.getString("nom"), réponse.getString("courriel"),réponse.getString("coordonnées")))
     }.singleOrNull()
 
@@ -49,11 +49,12 @@ class VideosDAOImpl(private val bd: JdbcTemplate, private val utilisateursDAO : 
  
     
     override fun modifier(id_video: Int, video: Video): Video? = bd.query("Update Video set titre = ?, description = ?, miniature = ?, fichier_video = ?, status = ? , auteur = ?, date_publication = ? where idVideo = ?", video.titre, video.description, video.miniature, video.fichiervideo, video.status, video.auteur.id_utilisateur, video.datePublication, id_video){ réponse, _ -> 
-        val utilisateur = utilisateursDAO.chercherParId(réponse.getInt("auteur"))
-        val utilisateur_id =  réponse.getInt("auteur")
+        val utilisateur = utilisateursDAO.chercherParId(réponse.getInt(1))
+        val utilisateur_id =  réponse.getInt(1)
         
         if( utilisateur != null){
             Video(réponse.getInt(1), réponse.getString("titre"), réponse.getString("description"), réponse.getString("miniature"), réponse.getString("fichier_video"), réponse.getDate("date_publication").toLocalDate(), réponse.getString("status"), Utilisateur ( utilisateur.id_utilisateur, utilisateur.nom, utilisateur.courriel, utilisateur.coordonnées ) )
+        
         } 
         else{
             throw RessourceInexistanteException("La video $utilisateur_id n'est pas inscrit au service.")
