@@ -12,13 +12,15 @@ L'application est une API publique qui permet à tous de consulter la liste des 
 
 Les utilisateurs connecté peuvent publier des vidéos tutoriel. Pour ce faire, l'utilisateur doit nommer la vidéo, fournir une images pour la miniature, décrire la vidéo et déposer le fichier vidéo. Après avoir publier une vidéo l'utilisateur peut modifier ou supprimé ses vidéos à sa guise.
 
-Afin de n'avoir que des vidéos de tutoriel des comptes administrateur sont en mesure de supprimé n'importe quelle vidéo contenant du contenu inaproprier pour la plateforme. Par exemple : un tutoriel sur comment la faire jouir, un tutoriel sur comment tricher dans les examen sans ce faire prendre, un tutoriel sur comment jouer à CLash of Clan, etc.
+Afin de n'avoir que des vidéos de tutoriel des comptes administrateur sont en mesure de supprimé n'importe quelle vidéo contenant du contenu inaproprier pour la plateforme. Par exemple : un tutoriel sur comment la faire jouir o===3, un tutoriel sur comment tricher dans les examen sans ce faire prendre, un tutoriel sur comment jouer à CLash of Clan, etc.
 
 ## Modèles
 https://miro.com/app/board/uXjVLdJyHBQ=/?share_link_id=262411277066
 
 ## Installation
 Pour l'authentification Auth0 il y a 2 roles Utilisateur(possède uniquement les droit suivants write:videos, update:videos, delete:videos) et admin possède tousles droit(updateAll:videos, deleteAll:videos, read:video, update:video ...)
+
+La création et l'insertion des utilisateur auth0 dans la base de données de l'api est esssentielle à son fonctionnement.
 
 Instructions pour déployer le projet (à venir)
 
@@ -34,4 +36,4 @@ Jacob Zapitoski
 Licence GNU GPL
 
 ## Statut du projet
-En développement.
+dévellopement en arrêt.
