@@ -1,10 +1,18 @@
 package com.projet.video.Modele
 import java.time.LocalDate
-data class Video(val id_video:Int?, 
+import java.time.format.DateTimeFormatter
+import java.time.Instant
+
+
+data class Video(var id_video:Int , 
     val titre:String, 
     var description:String,
     var miniature:String,
     var fichiervideo:String,
-    val datePublication:LocalDate,
-    var status:String, 
-    val auteur:Utilisateur){}
+    var datePublication:LocalDate = LocalDate.now() ,
+    var status:String ="public", 
+    var auteur:Utilisateur = Utilisateur(0,"", "", "") ){
+
+       
+
+    }

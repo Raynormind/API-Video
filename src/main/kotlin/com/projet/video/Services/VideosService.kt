@@ -11,14 +11,17 @@ import com.projet.video.Modele.Utilisateur
 import com.projet.video.Exceptions.RessourceInexistanteException
 import com.projet.video.Exceptions.MauvaiseRequeteException
 import com.projet.video.Exceptions.ConflitAvecUneRessourceExistanteException
+import com.projet.video.Exceptions.OperationNonAutoriseeException
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal
+
 
 
 @Service
 class VideosService(private val videosDAO: VideosDAO, private val utilisateursDAO: UtilisateursDAO){
-    @Secured("ROLE_ADMIN")
+    
     fun chercherTous(): List<Video> = videosDAO.chercherTous()
-    @PreAuthorize("hasRole('USER')")
-	@PostAuthorize("hasRole('ADMIN') || authentication.principal.email =  returnObject.auteur.courriel")
+    
     fun chercherParId(id_video: Int): Video {
         val video = videosDAO.chercherParId(id_video)
 
@@ -26,53 +29,94 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
 
         return video
     }
-    @PreAuthorize("hasRole('USER')")
+    
     fun chercherParTitre(titre: String): List<Video> = videosDAO.chercherParTitre(titre)
+
+
     fun chercherParStatut(status: String): List<Video> {
         val videos = videosDAO.chercherParStatut(status)
 
-        if ( videos == null ) throw RessourceInexistanteException("Aucunes videos ne font partis du status $status recherché.")
+        if ( videos.size != 0 ){ throw RessourceInexistanteException("Aucunes videos ne font partis du status $status recherché.")}
 
         return videos
     }
 
     fun chercherParAuteur(auteur: Utilisateur): List<Video> = videosDAO.chercherParAuteur(auteur)
 
-    @PreAuthorize("hasRole('USER') || hasRole('ADMIN')")
-    fun ajouter(video: Video): Video {
-        if(videosDAO.chercherParTitre(video.titre) != null ) throw ConflitAvecUneRessourceExistanteException("Il existe déjà une video avec le nom ${video.titre}.")
+    @PreAuthorize("hasAuthority('write:videos')")
+    fun ajouter(video: Video, courriel: String?): Video {
+        if( courriel == null ){
+            throw OperationNonAutoriseeException("Votre jeton d'accès ne contient pas les éléments nécesssaires à la création d'une video")
+        }
+    
+        if(videosDAO.chercherParTitreUnique(video.titre)?.titre == video.titre ){ 
+            throw ConflitAvecUneRessourceExistanteException("Il existe déjà une video avec le titre ${video.titre}.")
+        }
+        
+        val auteur = utilisateursDAO.chercherParCourriel(courriel)
+
+        if(auteur != null){
+            video.auteur = auteur 
+        }else{
+            throw OperationNonAutoriseeException("L'utilisateur ${courriel} est inconnu.")
+        }
+
         val nouvelleVideo = videosDAO.ajouter(video)
         
-        if(nouvelleVideo == null) throw MauvaiseRequeteException("La video ${video.titre} n'a pas pu être créée.")
-
+        if(nouvelleVideo == null) {
+            throw MauvaiseRequeteException("La video nommer ${video.titre} n'a pas pu être créée.")
+        }
         return nouvelleVideo
     }
-    @PreAuthorize("hasRole('USER')")
-    fun modifier(id_video: Int, video: Video): Video? {
+
+   
+    fun modifier(id_video: Int, video: Video, courriel: String?, listpermission : ArrayList<String>): Video? {
+        if(listpermission.first() == null){
+            throw OperationNonAutoriseeException("Cette video ne vous appartient pas.")
+        
+        }
+        val videoOriginal = videosDAO.chercherParId(id_video)
+        val auteur : Utilisateur?
+        if(videoOriginal!= null){
+            auteur = utilisateursDAO.chercherParId(videoOriginal.auteur.id_utilisateur)
+            if(auteur != null){
+                video.auteur = auteur
+            }
+        }
+         
         val videoModifier : Video?         
-        if( authentication.principal.email == video.auteur.courriel || hasRole("ADMIN"))
+        if( courriel == video.auteur.courriel || listpermission.contains("updateAll:videos"))
         {
-            videoModifier =videosDAO.modifier(id_video, video)
+           
+            videoModifier = videosDAO.modifier(id_video, video)
             if( videoModifier != null ){
                 return videoModifier
             } else { 
-                return throw RessourceInexistanteException("La video $id_video n'est pas inscrit au service.")
+                throw RessourceInexistanteException("La video $id_video n'est pas inscrit au service.")
             }
         } else { 
-            return throw
+            throw OperationNonAutoriseeException("Cette video ne vous appartient pas. ou ne posséder pas les droits")
         }
-    }
+    } 
 
-    @PreAuthorize("hasRole('USER') ")
-    @PostAuthorize("hasRole('ADMIN') || authentication.principal.username == returnObject.prenom ")
-    fun effacer(id_video: Int) {
-        if( authentication.principal.email == utilisateursDAO.chercherParId(videosDAO.chercherParId(id_video)?.auteur.id_utilisateur)  || hasRole("ADMIN"))
+    fun effacer(id_video: Int, courriel: String?, listpermission : ArrayList<String>) {
+
+        val videoÀSuprimer = videosDAO.chercherParId(id_video)
+        if(listpermission.first() == null){
+            throw OperationNonAutoriseeException("Cette video ne vous appartient pas.")
+        
+        }
+
+        if(videoÀSuprimer == null){
+            throw RessourceInexistanteException("La video $id_video n'est pas inscrit au service.")
+        }
+
+        if(listpermission.contains("deleteAll:videos") || courriel == videoÀSuprimer.auteur.courriel)
         {
-            if(videosDAO.chercherParId(id_video) == null){
                 videosDAO.effacer(id_video)
-            } throw RessourceInexistanteException("La video $id_video n'est pas inscrit au service.")
+
         } else { 
-            return throw
+            throw OperationNonAutoriseeException("Cette video ne vous appartient pas.")
         }
         
     }

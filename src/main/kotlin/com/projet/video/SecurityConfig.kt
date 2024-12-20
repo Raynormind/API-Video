@@ -1,4 +1,4 @@
-
+package com.projet.video
 
 
 
@@ -41,18 +41,15 @@ public class SecurityConfig {
 	*/
 
 	@Bean
-	@throw(Exception::class)
+	@Throws(Exception::class)
 	fun filterChain(http: HttpSecurity): SecurityFilterChain {
 		return http
 			.authorizeHttpRequests {
 				
 				it.requestMatchers("/videos").permitAll()
-				.requestMatchers(HttpMethod.PUT,"/videos/{id_video}").hasRole("USER")
-				.requestMatchers(HttpMethod.PUT,"/videos/{id_video}").hasRole("ADMIN")
-				.requestMatchers(HttpMethod.POST,"/videos").hasRole("USER")
-				.requestMatchers(HttpMethod.POST,"/videos").hasRole("ADMIN")
-				.requestMatchers(HttpMethod.DELETE,"/videos").hasRole("USER")
-				.requestMatchers(HttpMethod.DELETE,"/videos").hasRole("ADMIN")
+				//.requestMatchers(HttpMethod.PUT,"/videos/*").hasAuthority("SCOPE_update:videos")
+				.requestMatchers(HttpMethod.POST,"/videos").hasAuthority("SCOPE_write:videos")
+				//.requestMatchers(HttpMethod.DELETE,"/videos/{id_video}").hasAuthority("SCOPE_delete:videos")
 				.anyRequest().authenticated()
 			/* 	
 			authorizeRequests {
@@ -67,7 +64,7 @@ public class SecurityConfig {
 			}
 			.cors(withDefaults())
 			.oauth2ResourceServer { oauth2 ->
-                oauth2 .jwt(withDefaults())
+                oauth2.jwt(withDefaults())
 			}
 			.build()
 	}

@@ -102,7 +102,11 @@ INSERT INTO pnomLeslyJacobVideodb.Utilisateur (idUtilisateur, nom, courriel, coo
 (97, 'Ursule Carpentier', 'ursule.carpentier@domaine.com', '+33 6 12 34 56 174'),
 (98, 'Victorien Fabre', 'victorien.fabre@domaine.com', '+33 6 12 34 56 175'),
 (99, 'Wendy Dubois', 'wendy.dubois@domaine.com', '+33 6 12 34 56 176'),
-(100, 'Xavier Marchand', 'xavier.marchand@domaine.com', '+33 6 12 34 56 177');
+(100, 'Xavier Marchand', 'xavier.marchand@domaine.com', '+33 6 12 34 56 177'),
+(101, 'Jacob Zapitoski', 'jacobz@live.ca', '+33 6 12 34 56 178'),
+(102, 'Lesly-Junior Gourdet', 'lesly@gmail.com', '+33 6 12 34 56 179'),
+(103, 'Martine Marchand', 'martine@gmail.com', '+33 6 12 34 56 180'),
+(104, 'Luc Marchand', 'luc@gmail.com', '+33 6 12 34 56 1781');
 
 
 INSERT INTO  pnomLeslyJacobVideodb.Video (titre, description, miniature, fichier_video, date_publication, status, auteur) VALUES
