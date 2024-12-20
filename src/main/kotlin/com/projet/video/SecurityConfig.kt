@@ -47,20 +47,7 @@ public class SecurityConfig {
 			.authorizeHttpRequests {
 				
 				it.requestMatchers("/videos").permitAll()
-				//.requestMatchers(HttpMethod.PUT,"/videos/*").hasAuthority("SCOPE_update:videos")
-				.requestMatchers(HttpMethod.POST,"/videos").hasAuthority("SCOPE_write:videos")
-				//.requestMatchers(HttpMethod.DELETE,"/videos/{id_video}").hasAuthority("SCOPE_delete:videos")
 				.anyRequest().authenticated()
-			/* 	
-			authorizeRequests {
-				authorize("/videos", permitAll)
-				authorize("/videos/private", authenticated)
-				authorize("/videos?auteur={nomAuteur}", hasAuthority("SCOPE_read:videos"))
-				authorize("/videos", hasAuthority("SCOPE_write:videos"))
-				authorize("/videos/{id_video}", hasAuthority("SCOPE_update:videos"))
-				authorize("/videos/{id_video}", hasAuthority("SCOPE_delete:videos"))
-			}
-		*/	
 			}
 			.cors(withDefaults())
 			.oauth2ResourceServer { oauth2 ->

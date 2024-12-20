@@ -48,19 +48,32 @@ class VideosDAOImpl(private val bd: JdbcTemplate, private val utilisateursDAO : 
     }
  
     
-    override fun modifier(id_video: Int, video: Video): Video? = bd.query("Update Video set titre = ?, description = ?, miniature = ?, fichier_video = ?, status = ? , auteur = ?, date_publication = ? where idVideo = ?", video.titre, video.description, video.miniature, video.fichiervideo, video.status, video.auteur.id_utilisateur, video.datePublication, id_video){ réponse, _ -> 
-        val utilisateur = utilisateursDAO.chercherParId(réponse.getInt(1))
-        val utilisateur_id =  réponse.getInt(1)
-        
-        if( utilisateur != null){
-            Video(réponse.getInt(1), réponse.getString("titre"), réponse.getString("description"), réponse.getString("miniature"), réponse.getString("fichier_video"), réponse.getDate("date_publication").toLocalDate(), réponse.getString("status"), Utilisateur ( utilisateur.id_utilisateur, utilisateur.nom, utilisateur.courriel, utilisateur.coordonnées ) )
-        
-        } 
-        else{
-            throw RessourceInexistanteException("La video $utilisateur_id n'est pas inscrit au service.")
-        } 
+    override fun modifier(id_video: Int, video: Video): Video? { 
 
-    }.singleOrNull()
+       val videoOriginale = bd.query("select * from Video v, Utilisateur u where u.idUtilisateur = v.auteur && v.idVideo = ?", id_video) { réponse, _ ->
+            Video(réponse.getInt(1), réponse.getString("titre"), réponse.getString("description"), réponse.getString("miniature"), réponse.getString("fichier_video"), réponse.getDate("date_publication").toLocalDate(), réponse.getString("status"), Utilisateur(réponse.getInt(1), réponse.getString("nom"), réponse.getString("courriel"),réponse.getString("coordonnées")))
+        }.singleOrNull()
+        
+        if( videoOriginale != null){
+            bd.update("update Video set titre = ? where idVideo = ?", video.titre, id_video)
+            bd.update("update Video set description = ? where idVideo = ?",  video.description, id_video)
+            bd.update("update Video set miniature = ? where idVideo = ?", video.miniature, id_video)
+            bd.update("update Video set fichier_video = ? where idVideo = ?", video.fichiervideo, id_video)
+            bd.update("update Video set status = ? where idVideo = ?",  video.status, id_video)
+
+            val videoModifier = bd.query("select * from Video v, Utilisateur u where u.idUtilisateur = v.auteur && v.idVideo = ?", id_video) { réponse, _ ->
+                Video(réponse.getInt(1), réponse.getString("titre"), réponse.getString("description"), réponse.getString("miniature"), réponse.getString("fichier_video"), réponse.getDate("date_publication").toLocalDate(), réponse.getString("status"), Utilisateur(réponse.getInt(1), réponse.getString("nom"), réponse.getString("courriel"),réponse.getString("coordonnées")))
+            }.singleOrNull()
+
+            if( videoModifier != null){
+                return videoModifier
+            }else{
+                return null
+            }
+        }else{
+            return null
+        }
+    }
 
     override fun effacer(id_video: Int){
         bd.update("delete from Video where idVideo = ?",id_video)

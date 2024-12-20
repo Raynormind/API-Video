@@ -36,7 +36,7 @@ class VideosController( private val videosService: VideosService ) {
     @GetMapping("?titre={titre}")
     fun obtenirVideoParRechercheTitre(@PathVariable titre: String) : ResponseEntity<List<Video>> = ResponseEntity.ok(videosService.chercherParTitre( titre ))
 
-    @GetMapping("/{status}")
+    @GetMapping("/status/{status}")
     fun obtenirStatutVideo(@PathVariable status: String) : ResponseEntity<List<Video>> = ResponseEntity.ok( videosService.chercherParStatut( status ))
 
     @GetMapping("?auteur={nomAuteur}")
@@ -45,7 +45,7 @@ class VideosController( private val videosService: VideosService ) {
     @PostMapping()
     fun creerVideo(@RequestBody video: Video, @AuthenticationPrincipal jeton: Jwt): ResponseEntity<Video>{ 
         
-        val nouvelleVideo =  videosService.ajouter(video, jeton.claims["courriel"] as? String?)
+        val nouvelleVideo =  videosService.ajouter(video, jeton.claims["courriel"] as? String?,  jeton.claims["permissions"] as ArrayList<String>)
         
         val uri = ServletUriComponentsBuilder
             .fromCurrentRequest()

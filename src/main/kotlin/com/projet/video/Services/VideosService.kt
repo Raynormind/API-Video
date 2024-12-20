@@ -27,7 +27,7 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
             if(courriel != null){
                 val util = utilisateursDAO.chercherParCourriel(courriel)
                 if ( util != null ){
-                    return videosDAO.chercherParAuteur(util.id_utilisateur)
+                    return listOf()
                 }
             }
 
@@ -57,9 +57,10 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
 
     fun chercherParAuteur(auteur: Utilisateur): List<Video> = videosDAO.chercherParAuteur(auteur)
 
-    @PreAuthorize("hasAuthority('write:videos')")
-    fun ajouter(video: Video, courriel: String?): Video {
-        if( courriel == null ){
+    
+    fun ajouter(video: Video, courriel: String?, listpermission : ArrayList<String>): Video {
+
+        if( courriel == null || !listpermission.contains("write:videos")){
             throw OperationNonAutoriseeException("Votre jeton d'accès ne contient pas les éléments nécesssaires à la création d'une video")
         }
     
@@ -85,17 +86,14 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
 
    
     fun modifier(id_video: Int, video: Video, courriel: String?, listpermission : ArrayList<String>): Video? {
-        if(listpermission.first() == null){
-            throw OperationNonAutoriseeException("Cette video ne vous appartient pas.")
         
-        }
         val videoOriginal = videosDAO.chercherParId(id_video)
         val auteur : Utilisateur?
         if(videoOriginal!= null){
             auteur = utilisateursDAO.chercherParId(videoOriginal.auteur.id_utilisateur)
             if(auteur != null){
                 video.auteur = auteur
-            }
+            } 
         }
          
         val videoModifier : Video?         
@@ -116,10 +114,7 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
     fun effacer(id_video: Int, courriel: String?, listpermission : ArrayList<String>) {
 
         val videoÀSuprimer = videosDAO.chercherParId(id_video)
-        if(listpermission.first() == null){
-            throw OperationNonAutoriseeException("Cette video ne vous appartient pas.")
         
-        }
 
         if(videoÀSuprimer == null){
             throw RessourceInexistanteException("La video $id_video n'est pas inscrit au service.")
