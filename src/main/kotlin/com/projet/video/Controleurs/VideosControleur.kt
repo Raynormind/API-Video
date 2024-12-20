@@ -43,25 +43,11 @@ class VideosControleur( private val videosService: VideosService ) {
         
         val uri = ServletUriComponentsBuilder
             .fromCurrentRequest()
-            .path("/{id_video}")
-            .buildAndExpand(nouvelleVideo.id_video)
+            .path("/{auteur}")
+            .buildAndExpand(nouvelleVideo)
             .toUri()
         return ResponseEntity.created(uri).body(nouvelleVideo)
     } 
-    /* 
-    @PostMapping()
-    fun creerVideo(@RequestBody video: Video, @AuthenticationPrincipal jeton: Jwt): ResponseEntity<Video>{ 
-        
-        val nouvelleVideo =  videosService.ajouter(video, jeton.claims["courriel"] as? String?)
-        
-        val uri = ServletUriComponentsBuilder
-            .fromCurrentRequest()
-            .path("/{id_video}")
-            .buildAndExpand(nouvelleVideo.id_video)
-            .toUri()
-        return ResponseEntity.created(uri).body(nouvelleVideo)
-    } 
-    */
 
     @PutMapping("/{id_video}")
     fun modifierVideo(@PathVariable id_video: Int, @RequestBody video: Video, @AuthenticationPrincipal jeton: Jwt): ResponseEntity<Video> {

@@ -80,38 +80,10 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
         val nouvelleVideo = videosDAO.ajouter(video)
         
         if(nouvelleVideo == null) {
-            throw MauvaiseRequeteException("La video nommer ${video.titre} n'a pas pu être créée.")
+            throw MauvaiseRequeteException("La video nommé ${video.titre} n'a pas pu être créée.")
         }
         return nouvelleVideo
     }
-    
-    /*
-    @PreAuthorize("hasAuthority('write:videos')")
-    fun ajouter(video: Video, courriel: String?): Video {
-        if( courriel == null ){
-            throw OperationNonAutoriseeException("Votre jeton d'accès ne contient pas les éléments nécesssaires à la création d'une video")
-        }
-    
-        if(videosDAO.chercherParTitreUnique(video.titre)?.titre == video.titre ){ 
-            throw ConflitAvecUneRessourceExistanteException("Il existe déjà une video avec le titre ${video.titre}.")
-        }
-        
-        val auteur = utilisateursDAO.chercherParCourriel(courriel)
-
-        if(auteur != null){
-            video.auteur = auteur 
-        }else{
-            throw OperationNonAutoriseeException("L'utilisateur ${courriel} est inconnu.")
-        }
-
-        val nouvelleVideo = videosDAO.ajouter(video)
-        
-        if(nouvelleVideo == null) {
-            throw MauvaiseRequeteException("La video nommer ${video.titre} n'a pas pu être créée.")
-        }
-        return nouvelleVideo
-    }
-    */
    
     fun modifier(id_video: Int, video: Video, courriel: String?, listpermission : ArrayList<String>): Video? {
 
