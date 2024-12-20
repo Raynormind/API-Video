@@ -43,19 +43,15 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
 
         return video
     }
-    
-    fun chercherParTitre(titre: String): List<Video> = videosDAO.chercherParTitre(titre)
 
 
     fun chercherParStatut(status: String): List<Video> {
         val videos = videosDAO.chercherParStatut(status)
 
-        if ( videos.size != 0 ){ throw RessourceInexistanteException("Aucunes videos ne font partis du status $status recherché.")}
+        if ( videos.size == 0 ){ throw RessourceInexistanteException("Aucunes videos ne font partis du status $status recherché.")}
 
         return videos
     }
-
-    fun chercherParAuteur(auteur: Utilisateur): List<Video> = videosDAO.chercherParAuteur(auteur)
 
     
     fun ajouter(video: Video, courriel: String?, listpermission : ArrayList<String>): Video {

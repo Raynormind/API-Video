@@ -28,19 +28,12 @@ class VideosController( private val videosService: VideosService ) {
     @GetMapping()
     fun obtenirVideos(@AuthenticationPrincipal jeton: Jwt) : ResponseEntity<List<Video>> = ResponseEntity.ok(videosService.chercherTous(jeton.claims["permissions"] as ArrayList<String>, jeton.claims["courriel"] as? String?))
 
-
-
     @GetMapping("/{id_video}")
     fun obtenirVideoParId(@PathVariable id_video:Int) : ResponseEntity<Video> = ResponseEntity.ok(videosService.chercherParId( id_video ))
 
-    @GetMapping("?titre={titre}")
-    fun obtenirVideoParRechercheTitre(@PathVariable titre: String) : ResponseEntity<List<Video>> = ResponseEntity.ok(videosService.chercherParTitre( titre ))
 
     @GetMapping("/status/{status}")
     fun obtenirStatutVideo(@PathVariable status: String) : ResponseEntity<List<Video>> = ResponseEntity.ok( videosService.chercherParStatut( status ))
-
-    @GetMapping("?auteur={nomAuteur}")
-    fun obtenirVideoParRechercheAuteur(@PathVariable auteur: Utilisateur) : ResponseEntity<List<Video>> = ResponseEntity.ok( videosService.chercherParAuteur( auteur ))
         
     @PostMapping()
     fun creerVideo(@RequestBody video: Video, @AuthenticationPrincipal jeton: Jwt): ResponseEntity<Video>{ 
