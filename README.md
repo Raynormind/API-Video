@@ -15,9 +15,11 @@ Les utilisateurs connecté peuvent publier des vidéos tutoriel. Pour ce faire, 
 Afin de n'avoir que des vidéos de tutoriel des comptes administrateur sont en mesure de supprimé n'importe quelle vidéo contenant du contenu inaproprier pour la plateforme. Par exemple : un tutoriel sur comment la faire jouir, un tutoriel sur comment tricher dans les examen sans ce faire prendre, un tutoriel sur comment jouer à CLash of Clan, etc.
 
 ## Modèles
-Modèles Miro (à venir)
+https://miro.com/app/board/uXjVLdJyHBQ=/?share_link_id=262411277066
 
 ## Installation
+Pour l'authentification Auth0 il y a 2 roles Utilisateur(possède uniquement les droit suivants write:videos, update:videos, delete:videos) et admin possède tousles droit(updateAll:videos, deleteAll:videos, read:video, update:video ...)
+
 Instructions pour déployer le projet (à venir)
 
 ## Utilisation
