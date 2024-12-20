@@ -1,6 +1,8 @@
 package com.projet.video.DAO
 
 import com.projet.video.Modele.Utilisateur
+import org.springframework.security.oauth2.jwt.Jwt
+
 
 interface DAO<T> {
     fun chercherTous(): List<T>

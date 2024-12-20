@@ -3,6 +3,7 @@ package com.projet.video.DAO
 import org.springframework.stereotype.Repository
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.query
+import org.springframework.security.oauth2.jwt.Jwt
 
 import com.projet.video.Modele.Utilisateur
 

@@ -2,7 +2,7 @@
 
 
 
-INSERT INTO pnomLeslyJacobVideodb.Utilisateur (idUtilisateur, nom, courriel, coordonnées) VALUES
+INSERT INTO lgourdetLeslyJacobVideodb.Utilisateur (idUtilisateur, nom, courriel, coordonnées) VALUES
 (1, 'Alice Martin', 'alice.martin@domaine.com', '+33 6 12 34 56 78'),
 (2, 'Bob Dupont', 'bob.dupont@domaine.com', '+33 6 12 34 56 79'),
 (3, 'Chloé Bernard', 'chloe.bernard@domaine.com', '+33 6 12 34 56 80'),
@@ -109,7 +109,7 @@ INSERT INTO pnomLeslyJacobVideodb.Utilisateur (idUtilisateur, nom, courriel, coo
 (104, 'Luc Marchand', 'luc@gmail.com', '+33 6 12 34 56 1781');
 
 
-INSERT INTO  pnomLeslyJacobVideodb.Video (titre, description, miniature, fichier_video, date_publication, status, auteur) VALUES
+INSERT INTO  lgourdetLeslyJacobVideodb.Video (titre, description, miniature, fichier_video, date_publication, status, auteur) VALUES
 ("Les Aventures d'Alice", 'Une aventure captivante dans un monde fantastique.', 'miniature1.jpg', 'video1.mp4', '2023-01-01', 'public', 1),
 ('Voyage au Centre de la Terre', 'Une exploration des profondeurs de notre planète.', 'miniature2.jpg', 'video2.mp4', '2023-01-02', 'public', 2),
 ('La Magie de Noël', "Un film sur l'esprit des fêtes.", 'miniature3.jpg', 'video3.mp4', '2023-01-03', 'public', 5),

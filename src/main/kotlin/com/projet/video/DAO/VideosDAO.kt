@@ -2,6 +2,9 @@ package com.projet.video.DAO
 
 import com.projet.video.Modele.Video
 import com.projet.video.Modele.Utilisateur
+import org.springframework.security.oauth2.jwt.Jwt
+
+
 
 interface VideosDAO: DAO<Video> {
     override fun chercherTous(): List<Video>

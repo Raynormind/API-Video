@@ -20,7 +20,20 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal
 @Service
 class VideosService(private val videosDAO: VideosDAO, private val utilisateursDAO: UtilisateursDAO){
     
-    fun chercherTous(): List<Video> = videosDAO.chercherTous()
+    fun chercherTous(listpermission : ArrayList<String>, courriel: String?): List<Video>{
+        if(listpermission.contains("read:videos")){
+           return videosDAO.chercherTous()
+        } else {
+            if(courriel != null){
+                val util = utilisateursDAO.chercherParCourriel(courriel)
+                if ( util != null ){
+                    return videosDAO.chercherParAuteur(util)
+                }
+            }
+
+            throw OperationNonAutoriseeException("Vous ne possédez pas les droits ou vous ne possédez aucune vidéos")
+        }
+    }
     
     fun chercherParId(id_video: Int): Video {
         val video = videosDAO.chercherParId(id_video)
@@ -29,30 +42,32 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
 
         return video
     }
+
+    fun chercherParTitre(titre: String): List<Video>{
+        val videos = videosDAO.chercherParTitre(titre)
+
+        if ( videos.size == 0 ){ throw RessourceInexistanteException("Aucunes videos ne font partis du titre $titre recherché.")}
+        
+        return videos
+    }
     
-    fun chercherParTitre(titre: String): List<Video> = videosDAO.chercherParTitre(titre)
-
-
     fun chercherParStatut(status: String): List<Video> {
         val videos = videosDAO.chercherParStatut(status)
 
-        if ( videos.size != 0 ){ throw RessourceInexistanteException("Aucunes videos ne font partis du status $status recherché.")}
-
+        if ( videos.size == 0 ){ throw RessourceInexistanteException("Aucunes videos ne font partis du status $status recherché.")}
+        
         return videos
     }
 
-    fun chercherParAuteur(auteur: Utilisateur): List<Video> = videosDAO.chercherParAuteur(auteur)
-
-    @PreAuthorize("hasAuthority('write:videos')")
-    fun ajouter(video: Video, courriel: String?): Video {
-        if( courriel == null ){
-            throw OperationNonAutoriseeException("Votre jeton d'accès ne contient pas les éléments nécesssaires à la création d'une video")
+    fun ajouter(video: Video, courriel: String?, listpermission : ArrayList<String>): Video {
+        if(courriel == null || listpermission.contains("write:videos")){
+            throw OperationNonAutoriseeException("Cette video ne vous appartient pas. ou vous ne possédez pas les droits")
         }
-    
+        
         if(videosDAO.chercherParTitreUnique(video.titre)?.titre == video.titre ){ 
             throw ConflitAvecUneRessourceExistanteException("Il existe déjà une video avec le titre ${video.titre}.")
         }
-        
+
         val auteur = utilisateursDAO.chercherParCourriel(courriel)
 
         if(auteur != null){
@@ -71,10 +86,7 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
 
    
     fun modifier(id_video: Int, video: Video, courriel: String?, listpermission : ArrayList<String>): Video? {
-        if(listpermission.first() == null){
-            throw OperationNonAutoriseeException("Cette video ne vous appartient pas.")
-        
-        }
+
         val videoOriginal = videosDAO.chercherParId(id_video)
         val auteur : Utilisateur?
         if(videoOriginal!= null){
@@ -92,20 +104,16 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
             if( videoModifier != null ){
                 return videoModifier
             } else { 
-                throw RessourceInexistanteException("La video $id_video n'est pas inscrit au service.")
+                throw RessourceInexistanteException("La video $id_video n'est pas inscrite au service.")
             }
         } else { 
-            throw OperationNonAutoriseeException("Cette video ne vous appartient pas. ou ne posséder pas les droits")
+            throw OperationNonAutoriseeException("Cette video ne vous appartient pas. ou vous ne possédez pas les droits")
         }
     } 
 
     fun effacer(id_video: Int, courriel: String?, listpermission : ArrayList<String>) {
 
         val videoÀSuprimer = videosDAO.chercherParId(id_video)
-        if(listpermission.first() == null){
-            throw OperationNonAutoriseeException("Cette video ne vous appartient pas.")
-        
-        }
 
         if(videoÀSuprimer == null){
             throw RessourceInexistanteException("La video $id_video n'est pas inscrit au service.")
