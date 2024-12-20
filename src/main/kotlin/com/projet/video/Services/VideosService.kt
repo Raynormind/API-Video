@@ -36,7 +36,7 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
     }
 
     
-    fun chercherParId(id_video: Int): Video {
+    fun chercherParId(id_video: Int): Video? {
         val video = videosDAO.chercherParId(id_video)
 
         if ( video == null ) throw RessourceInexistanteException("La video $id_video n'est pas inscrite au service.")
