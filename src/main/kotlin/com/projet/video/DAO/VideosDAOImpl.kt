@@ -25,10 +25,6 @@ class VideosDAOImpl(private val bd: JdbcTemplate, private val utilisateursDAO : 
     override fun chercherParTitreUnique(titre: String): Video? = bd.query("select * from Video v, Utilisateur u where u.idUtilisateur = v.auteur && v.titre = ?",titre){ réponse, _ ->
         Video(réponse.getInt(1), réponse.getString("titre"), réponse.getString("description"), réponse.getString("miniature"), réponse.getString("fichier_video"), réponse.getDate("date_publication").toLocalDate(), réponse.getString("status"), Utilisateur(réponse.getInt(1), réponse.getString("nom"), réponse.getString("courriel"),réponse.getString("coordonnées")))
     }.singleOrNull()
-    
-    override fun chercherParTitre(titre: String): List<Video> = bd.query("select * from Video v, Utilisateur u where u.idUtilisateur = v.auteur && v.titre = ?",titre){ réponse, _ ->
-        Video(réponse.getInt(1), réponse.getString("titre"), réponse.getString("description"), réponse.getString("miniature"), réponse.getString("fichier_video"), réponse.getDate("date_publication").toLocalDate(), réponse.getString("status"), Utilisateur(réponse.getInt(1), réponse.getString("nom"), réponse.getString("courriel"),réponse.getString("coordonnées")))
-    }.toList()
 
     override fun chercherParAuteur(auteur: Utilisateur): List<Video> = bd.query("select * from Video v, Utilisateur u where v.auteur = u.idUtilisateur && v.auteur = ?", auteur.id_utilisateur){ réponse, _ ->
         Video(réponse.getInt(1), réponse.getString("titre"), réponse.getString("description"), réponse.getString("miniature"), réponse.getString("fichier_video"), réponse.getDate("date_publication").toLocalDate(), réponse.getString("status"), Utilisateur(réponse.getInt(1), réponse.getString("nom"), réponse.getString("courriel"),réponse.getString("coordonnées")))

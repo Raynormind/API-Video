@@ -43,12 +43,12 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
         return video
     }
 
-    fun chercherParTitre(titre: String): List<Video>{
-        val videos = videosDAO.chercherParTitre(titre)
+    fun chercherParTitreUnique(titre: String): Video{
+        val video = videosDAO.chercherParTitreUnique(titre)
 
-        if ( videos.size == 0 ){ throw RessourceInexistanteException("Aucunes videos ne font partis du titre $titre recherché.")}
+        if ( video == null ){ throw RessourceInexistanteException("Aucunes videos ne font partis du titre $titre recherché.")}
         
-        return videos
+        return video
     }
     
     fun chercherParStatut(status: String): List<Video> {
@@ -59,8 +59,9 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
         return videos
     }
 
+    
     fun ajouter(video: Video, courriel: String?, listpermission : ArrayList<String>): Video {
-        if(courriel == null || listpermission.contains("write:videos")){
+        if(courriel == null || !listpermission.contains("write:videos")){
             throw OperationNonAutoriseeException("Cette video ne vous appartient pas. ou vous ne possédez pas les droits")
         }
         
@@ -83,7 +84,34 @@ class VideosService(private val videosDAO: VideosDAO, private val utilisateursDA
         }
         return nouvelleVideo
     }
+    
+    /*
+    @PreAuthorize("hasAuthority('write:videos')")
+    fun ajouter(video: Video, courriel: String?): Video {
+        if( courriel == null ){
+            throw OperationNonAutoriseeException("Votre jeton d'accès ne contient pas les éléments nécesssaires à la création d'une video")
+        }
+    
+        if(videosDAO.chercherParTitreUnique(video.titre)?.titre == video.titre ){ 
+            throw ConflitAvecUneRessourceExistanteException("Il existe déjà une video avec le titre ${video.titre}.")
+        }
+        
+        val auteur = utilisateursDAO.chercherParCourriel(courriel)
 
+        if(auteur != null){
+            video.auteur = auteur 
+        }else{
+            throw OperationNonAutoriseeException("L'utilisateur ${courriel} est inconnu.")
+        }
+
+        val nouvelleVideo = videosDAO.ajouter(video)
+        
+        if(nouvelleVideo == null) {
+            throw MauvaiseRequeteException("La video nommer ${video.titre} n'a pas pu être créée.")
+        }
+        return nouvelleVideo
+    }
+    */
    
     fun modifier(id_video: Int, video: Video, courriel: String?, listpermission : ArrayList<String>): Video? {
 

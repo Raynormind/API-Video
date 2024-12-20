@@ -31,7 +31,7 @@ class VideosControleur( private val videosService: VideosService ) {
     fun obtenirVideoParId(@PathVariable id_video:Int) : ResponseEntity<Video> = ResponseEntity.ok(videosService.chercherParId( id_video))
 
     @GetMapping("?titre={titre}")
-    fun obtenirVideoParRechercheTitre(@PathVariable titre: String) : ResponseEntity<List<Video>> = ResponseEntity.ok(videosService.chercherParTitre( titre ))
+    fun obtenirVideoParRechercheTitre(@PathVariable titre: String) : ResponseEntity<Video> = ResponseEntity.ok(videosService.chercherParTitreUnique( titre ))
 
     @GetMapping("/status/{status}")
     fun obtenirStatutVideo(@PathVariable status: String) : ResponseEntity<List<Video>> = ResponseEntity.ok( videosService.chercherParStatut( status ))
@@ -48,6 +48,20 @@ class VideosControleur( private val videosService: VideosService ) {
             .toUri()
         return ResponseEntity.created(uri).body(nouvelleVideo)
     } 
+    /* 
+    @PostMapping()
+    fun creerVideo(@RequestBody video: Video, @AuthenticationPrincipal jeton: Jwt): ResponseEntity<Video>{ 
+        
+        val nouvelleVideo =  videosService.ajouter(video, jeton.claims["courriel"] as? String?)
+        
+        val uri = ServletUriComponentsBuilder
+            .fromCurrentRequest()
+            .path("/{id_video}")
+            .buildAndExpand(nouvelleVideo.id_video)
+            .toUri()
+        return ResponseEntity.created(uri).body(nouvelleVideo)
+    } 
+    */
 
     @PutMapping("/{id_video}")
     fun modifierVideo(@PathVariable id_video: Int, @RequestBody video: Video, @AuthenticationPrincipal jeton: Jwt): ResponseEntity<Video> {

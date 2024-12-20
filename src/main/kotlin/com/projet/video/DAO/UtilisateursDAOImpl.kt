@@ -23,8 +23,6 @@ class UtilisateursDAOImpl(private val bd: JdbcTemplate): UtilisateursDAO {
     
     override fun chercherParTitreUnique (titre: String): Utilisateur? { throw UnsupportedOperationException() }
 
-    override fun chercherParTitre(titre: String): List<Utilisateur> { throw UnsupportedOperationException() }
-
     override fun chercherParAuteur(auteur: Utilisateur): List<Utilisateur> {throw UnsupportedOperationException() }
 
     override fun chercherParStatut(status: String): List<Utilisateur> {throw UnsupportedOperationException() }
