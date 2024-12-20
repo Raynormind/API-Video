@@ -11,7 +11,7 @@ import com.projet.video.Modele.Utilisateur
 @Repository
 class UtilisateursDAOImpl(private val bd: JdbcTemplate): UtilisateursDAO {
     
-    override fun chercherParId(id_video: Int): Utilisateur? = bd.query("select * from Utilisateur u where u.id = ?", id_video) { réponse, _ ->
+    override fun chercherParId(id_video: Int): Utilisateur? = bd.query("select * from Utilisateur u where u.idUtilisateur = ?", id_video) { réponse, _ ->
         Utilisateur(réponse.getInt(1), réponse.getString("nom"), réponse.getString("courriel"), réponse.getString("coordonnées"))
     }.singleOrNull()
 

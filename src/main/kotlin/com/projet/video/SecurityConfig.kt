@@ -47,9 +47,9 @@ public class SecurityConfig {
 			.authorizeHttpRequests {
 				
 				it.requestMatchers("/videos").permitAll()
-				.requestMatchers("/videos/{id_video}").hasAuthority("update:videos")
-				.requestMatchers("/videos").hasAuthority("write:videos")
-				.requestMatchers("/videos").hasAuthority("SCOPE_delete:videos")
+				//.requestMatchers(HttpMethod.PUT,"/videos/*").hasAuthority("SCOPE_update:videos")
+				.requestMatchers(HttpMethod.POST,"/videos").hasAuthority("SCOPE_write:videos")
+				//.requestMatchers(HttpMethod.DELETE,"/videos/{id_video}").hasAuthority("SCOPE_delete:videos")
 				.anyRequest().authenticated()
 			/* 	
 			authorizeRequests {
