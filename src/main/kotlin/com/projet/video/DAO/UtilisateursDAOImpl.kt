@@ -29,7 +29,7 @@ class UtilisateursDAOImpl(private val bd: JdbcTemplate): UtilisateursDAO {
 
     override fun chercherParStatut(status: String): List<Utilisateur> {throw UnsupportedOperationException() }
 
-    override fun ajouter(video: Utilisateur, jeton: Jwt): Utilisateur? { throw UnsupportedOperationException()}
+    override fun ajouter(video: Utilisateur): Utilisateur? { throw UnsupportedOperationException()}
 
     override fun modifier(id_video: Int, video: Utilisateur): Utilisateur? { throw UnsupportedOperationException() }
 
