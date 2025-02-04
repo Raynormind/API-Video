@@ -1,0 +1,1455 @@
+{
+	"info": {
+		"_postman_id": "c3fdb68b-bee7-4d81-ba43-fa3c32d0f81c",
+		"name": "Video",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38439930",
+		"_collection_link": "https://atelier1.postman.co/workspace/Projet-Video~cb80d4db-105c-4e81-95d4-2221a6a17bd0/collection/38130561-c3fdb68b-bee7-4d81-ba43-fa3c32d0f81c?action=share&source=collection_link&creator=38439930"
+	},
+	"item": [
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "jacob@live.ca, admin",
+					"item": [
+						{
+							"name": "Supprime une vidéo avec Admin connecté",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://idefix.dti.crosemont.quebec:9031/videos/{videoid}",
+									"protocol": "http",
+									"host": [
+										"idefix",
+										"dti",
+										"crosemont",
+										"quebec"
+									],
+									"port": "9031",
+									"path": [
+										"videos",
+										"{videoid}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Supprime une vidéo de l'utilisateur connecté",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9026/videos/11",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9026",
+											"path": [
+												"videos",
+												"11"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Supprime une vidéo de l'utilisateur connecté Copy",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9026/videos/16",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9026",
+											"path": [
+												"videos",
+												"16"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Retourne une vidéo publique avec Admin authentifié",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://idefix.dti.crosemont.quebec:9031/videos/{idVideo}",
+									"protocol": "http",
+									"host": [
+										"idefix",
+										"dti",
+										"crosemont",
+										"quebec"
+									],
+									"port": "9031",
+									"path": [
+										"videos",
+										"{idVideo}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Retourne une vidéo publique avec Admin authentifié",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9026/videos/1",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9026",
+											"path": [
+												"videos",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{   \n    \"idVideo\": \"1\",\n    \"video\": [\n        \"Toute une vidéo!\",\n        \"Une vidéo complète sur la plateforme.\",\n        \"unevidéocomplète.mp4\",\n        \"Lesly Gourdet\",\n        \"30/09/2024\",\n        \"miniature1.jpg\",\n        \"00:20:30\",\n        \"150000kb\"\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Retourne toutes les vidéos avec Admin authentifié",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://idefix.dti.crosemont.quebec:9026/videos",
+									"protocol": "http",
+									"host": [
+										"idefix",
+										"dti",
+										"crosemont",
+										"quebec"
+									],
+									"port": "9026",
+									"path": [
+										"videos"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Retourne toutes les vidéos avec Admin authentifié",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9026/vidéos",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9026",
+											"path": [
+												"vidéos"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"vidéos\": [\n        {\n            \"userId\": \"1\",\n            \"vidéospubliques\": [\n                [\"1\",\"Toute une vidéo!\",\"miniature1.jpg\"],\n                [\"3\",\"Visite d'un concessionnaire\",\"miniature2.jpg\"],\n                [\"5\",\"Mon chien à mangé mon devoir!\",\"miniature3.jpg\"]\n            ],\n            \"vidéosprivées\": [\n                [\"2\",\"Toute une vidéo partie 2!\",\"miniature4.jpg\"],\n                [\"4\",\"Jeu de mémoire 127 (20/09/2024)\",\"miniature2.jpg\"]\n            ]\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Modifier le statut d'une vidéo",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\":\"public\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://idefix.dti.crosemont.quebec:9026/videos/{idVidéo}",
+									"protocol": "http",
+									"host": [
+										"idefix",
+										"dti",
+										"crosemont",
+										"quebec"
+									],
+									"port": "9026",
+									"path": [
+										"videos",
+										"{idVidéo}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Modifier le statut d'une vidéo",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"titre\":\"Toute une vidéo géniale!\",\r\n    \"description\":\"Une vidéo complète sur la plateforme.\",\r\n    \"miniature\":\"miniature11.jpg\",\r\n    \"fichiervideo\":\"unevidéocomplète.mp4\",\r\n    \"status\":\"privé\"\r\n    \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9026/videos/16",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9026",
+											"path": [
+												"videos",
+												"16"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"videoid\":\"1\",\n    \"titre\":\"Ouvrir une boîte de conserve\",\n    \"description\":\"descrition non nulle pour l'exemple  ici mes sources\",\n    \"miniature\":\"nouvelleMiniature.png\",\n    \"fichiervideo\":\"Boite_Conserve2.mp4\",\n    \"status\":\"privé\",\n    \"auteur\":\"Jacob Zapitoski\",\n    \"datePublication\":\"30/09/2024\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Créer une vidéo Copy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titre\":\"Test avec admin de creation de video\",\r\n    \"description\":\"descrition non nulle pour l'exemple ici mes sources\",\r\n    \"miniature\":\"nouvelleMiniature.png\",\r\n    \"fichiervideo\":\"test_admin.mp4\",\r\n    \"status\":\"public\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://idefix.dti.crosemont.quebec:9031/videos",
+									"protocol": "http",
+									"host": [
+										"idefix",
+										"dti",
+										"crosemont",
+										"quebec"
+									],
+									"port": "9031",
+									"path": [
+										"videos"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Créer une vidéo",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"titre\":\"Toute une vidéo!\",\r\n    \"description\":\"Une vidéo complète sur la plateforme.\",\r\n    \"miniature\":\"miniature1.jpg\",\r\n    \"fichiervideo\":\"unevidéocomplète.mp4\",\r\n    \"status\":\"public\"   \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9026/videos",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9026",
+											"path": [
+												"videos"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"videoid\":\"11\",\n    \"titre\":\"Toute une vidéo!\",\n    \"description\":\"Une vidéo complète sur la plateforme.\",\n    \"miniature\":\"miniature11.jpg\",\n    \"fichierVidéo\":\"unevidéocomplète.mp4\",\n    \"status\":\"public\",\n    \"auteur\":\"Jacob Zapitoski\",\n    \"datePublication\":\"30/09/2024\"\n}"
+								},
+								{
+									"name": "Créer une vidéo2",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"titre\":\"Partage de fichier vidéos\",\r\n    \"description\":\"descrition ici mes sources\",\r\n    \"miniature\":\"video.png\",\r\n    \"fichiervideo\":\"une_video.mp4\",\r\n    \"status\":\"prive\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9031/videos",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9031",
+											"path": [
+												"videos"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"videoid\":\"12\",\n    \"titre\":\"Ouvrir une boîte de conserve\",\n    \"description\":\"descrition ici mes sources\",\n    \"miniature\":\"ouvreBoite.png\",\n    \"fichierVidéo\":\"Boite_Conserve.mp4\",\n    \"status\":\"privé\",\n    \"auteur\":\"Jacob Zapitoski\",\n    \"datePublication\":\"30/09/2024\"\n}"
+								},
+								{
+									"name": "Requête sans contenu",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9026/videos",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9026",
+											"path": [
+												"videos"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\":\"La création nécessite un titre , une description, une miniature et une vidéo\"\n}"
+								}
+							]
+						}
+					],
+					"auth": {
+						"type": "oauth2",
+						"oauth2": [
+							{
+								"key": "tokenRequestParams",
+								"value": [
+									{
+										"key": "audience",
+										"value": "https://video.com",
+										"enabled": true,
+										"send_as": "request_body"
+									}
+								],
+								"type": "any"
+							},
+							{
+								"key": "accessTokenUrl",
+								"value": "https://{{domainjz}}/oauth/token",
+								"type": "string"
+							},
+							{
+								"key": "clientId",
+								"value": "{{ClientIdjz}}",
+								"type": "string"
+							},
+							{
+								"key": "scope",
+								"value": "openid",
+								"type": "string"
+							},
+							{
+								"key": "username",
+								"value": "{{auth0_jacob}}",
+								"type": "string"
+							},
+							{
+								"key": "password",
+								"value": "{{auth0_jacobMDP}}",
+								"type": "string"
+							},
+							{
+								"key": "clientSecret",
+								"value": "{{ClientSecretjz}}",
+								"type": "string"
+							},
+							{
+								"key": "grant_type",
+								"value": "password_credentials",
+								"type": "string"
+							},
+							{
+								"key": "tokenName",
+								"value": "Video",
+								"type": "string"
+							},
+							{
+								"key": "addTokenTo",
+								"value": "header",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "utilisateur",
+			"item": [
+				{
+					"name": "lesly@gmail.com",
+					"item": [
+						{
+							"name": "A Implémenter",
+							"item": [
+								{
+									"name": "Retourne les vidéos publiques et privées de l'utilisateur authentifié",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9026/videos/",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9026",
+											"path": [
+												"videos",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Retourne les vidéos publiques et privées de l'utilisateur authentifié",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://5e7dd0dc-33a1-402d-af65-99405a0d4d23.mock.pstmn.io/vidéos",
+													"protocol": "https",
+													"host": [
+														"5e7dd0dc-33a1-402d-af65-99405a0d4d23",
+														"mock",
+														"pstmn",
+														"io"
+													],
+													"path": [
+														"vidéos"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"userId\": \"1\",\n    \"vidéospubliques\": [\n        [\"1\",\"Toute une vidéo!\",\"miniature1.jpg\"],\n        [\"3\",\"Visite d'un concessionnaire\",\"miniature2.jpg\"],\n        [\"5\",\"Mon chien à mangé mon devoir!\",\"miniature3.jpg\"]\n    ],\n    \"vidéosprivées\": [\n        [\"2\",\"Toute une vidéo partie 2!\",\"miniature4.jpg\"],\n        [\"4\",\"Jeu de mémoire 127 (20/09/2024)\",\"miniature2.jpg\"]\n    ]\n}"
+										}
+									]
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"packages": {},
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"packages": {},
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Retourne les vidéos publiques avec Utilisateur authentifié",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://idefix.dti.crosemont.quebec:9026/videos/status/{status}",
+									"protocol": "http",
+									"host": [
+										"idefix",
+										"dti",
+										"crosemont",
+										"quebec"
+									],
+									"port": "9026",
+									"path": [
+										"videos",
+										"status",
+										"{status}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Étant donné un utilisateur authentifié voulant obtenir la liste de ses vidéos publiques, lorsqu'on exécute la requête on obtient la liste de ses vidéos publiques avec un code 200",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9031/videos/public",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9031",
+											"path": [
+												"videos",
+												"public"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"vidéos\": [\n        \"1\",\n        \"6\",\n        \"10\"\n    ]\n}"
+								},
+								{
+									"name": "Étant donné un utilisateur authentifié voulant obtenir la liste de ses vidéos privés, lorsqu'on exécute la requête on obtient la liste de ses vidéos privés avec un code 200",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9031/videos/prive",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9031",
+											"path": [
+												"videos",
+												"prive"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "Retourne seulement les vidéos privés de l'utilisateur authentifié",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://idefix.dti.crosemont.quebec:9031/videos/status/prive",
+									"protocol": "http",
+									"host": [
+										"idefix",
+										"dti",
+										"crosemont",
+										"quebec"
+									],
+									"port": "9031",
+									"path": [
+										"videos",
+										"status",
+										"prive"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Étant donné un utilisateur authentifié voulant obtenir la liste de ses vidéos publiques, lorsqu'on exécute la requête on obtient la liste de ses vidéos publiques avec un code 200",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9031/videos/public",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9031",
+											"path": [
+												"videos",
+												"public"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"vidéos\": [\n        \"1\",\n        \"6\",\n        \"10\"\n    ]\n}"
+								},
+								{
+									"name": "Étant donné un utilisateur authentifié voulant obtenir la liste de ses vidéos privés, lorsqu'on exécute la requête on obtient la liste de ses vidéos privés avec un code 200",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9031/videos/prive",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9031",
+											"path": [
+												"videos",
+												"prive"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "Supprime une vidéo de l'utilisateur connecté",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://idefix.dti.crosemont.quebec:9026/videos/{id}",
+									"protocol": "http",
+									"host": [
+										"idefix",
+										"dti",
+										"crosemont",
+										"quebec"
+									],
+									"port": "9026",
+									"path": [
+										"videos",
+										"{id}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Supprime une vidéo de l'utilisateur connecté",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9026/videos/17",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9026",
+											"path": [
+												"videos",
+												"17"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\r\n    \"message\" : \"Une vidéo à été suprimé.\"\r\n}"
+								},
+								{
+									"name": "Supprime une vidéo de l'utilisateur connecté Copy",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9026/videos/14",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9026",
+											"path": [
+												"videos",
+												"14"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\r\n    \"message\" : \"Une vidéo à été suprimé.\"\r\n}"
+								}
+							]
+						},
+						{
+							"name": "Créer une vidéo",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titre\":\"Creer des videos depuis Postman\",\r\n    \"description\":\"Exemples de création de videos dans Postman\",\r\n    \"miniature\":\"postman.png\",\r\n    \"fichiervideo\":\"postman_exemple.mp4\",\r\n    \"status\":\"public\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://idefix.dti.crosemont.quebec:9031/videos",
+									"protocol": "http",
+									"host": [
+										"idefix",
+										"dti",
+										"crosemont",
+										"quebec"
+									],
+									"port": "9031",
+									"path": [
+										"videos"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Créer une vidéo",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"titre\":\"La fin est proche\",\r\n    \"description\":\"Une vidéo complète sur la plateforme.\",\r\n    \"miniature\":\"miniature1.jpg\",\r\n    \"fichiervideo\":\"unevidéocomplète.mp4\",\r\n    \"status\":\"public\"   \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9026/videos",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9026",
+											"path": [
+												"videos"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id_video\":\"1\",\n    \"titre\":\"Ouvrir une boîte de conserve\",\n    \"description\":\"descrition non nulle pour l'exemple  ici mes sources\",\n    \"miniature\":\"nouvelleMiniature.png\",\n    \"fichierVidéo\":\"Boite_Conserve.mp4\",\n    \"statut\":\"public\",\n    \"auteur\":\"Lesly Gourdet\",\n    \"datePublication\":\"30/09/2024\"\n}"
+								},
+								{
+									"name": "Créer une vidéo2",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"titre\":\"Ouvrir une boîte de conserve\",\r\n    \"description\":\"descrition ici mes sources\",\r\n    \"miniature\":\"ouvreBoite.png\",\r\n    \"fichiervideo\":\"Boite_Conserve.mp4\",\r\n    \"status\":\"privé\" \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9031/videos",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9031",
+											"path": [
+												"videos"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id_video\":\"2\",\n    \"titre\":\"Ouvrir une boîte de conserve\",\n    \"description\":\"descrition non nulle pour l'exemple  ici mes sources\",\n    \"miniature\":\"ouvreBoite.png\",\n    \"fichierVidéo\":\"Boite_Conserve.mp4\",\n    \"statut\":\"privé\",\n    \"auteur\":\"Jacob Zapitoski\",\n    \"datePublication\":\"30/09/2024\"\n}"
+								},
+								{
+									"name": "Requête sans contenu",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://idefix.dti.crosemont.quebec:9026/videos",
+											"protocol": "http",
+											"host": [
+												"idefix",
+												"dti",
+												"crosemont",
+												"quebec"
+											],
+											"port": "9026",
+											"path": [
+												"videos"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\":\"La création nécessite un titre , une description, une miniature et une vidéo\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Modifier une vidéo dont l'utilisateur est l'auteur",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"titre\":\"Ouvrir une boîte de conserve\",\r\n            \"description\":\"descrition non nulle pour l'exemple  ici mes sources\",\r\n            \"miniature\":\"nouvelleMiniature.png\",\r\n            \"fichierVidéo\":\"Boite_Conserve.mp4\",\r\n            \"statut\":\"public\"\r\n        }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://idefix.dti.crosemont.quebec:9031/videos/{idVidéo}",
+									"protocol": "http",
+									"host": [
+										"idefix",
+										"dti",
+										"crosemont",
+										"quebec"
+									],
+									"port": "9031",
+									"path": [
+										"videos",
+										"{idVidéo}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Modifier une vidéo dont l'utilisateur est l'auteur",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"vidéo\": [\r\n        {\r\n            \"titre\":\"Ouvrir une boîte de conserve\",\r\n            \"description\":\"descrition non nulle pour l'exemple  ici mes sources\",\r\n            \"miniature\":\"nouvelleMiniature.png\",\r\n            \"fichier_video\":\"Boite_Conserve2.mp4\"\r\n        }\r\n    ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://5e7dd0dc-33a1-402d-af65-99405a0d4d23.mock.pstmn.io/vidéos/1",
+											"protocol": "https",
+											"host": [
+												"5e7dd0dc-33a1-402d-af65-99405a0d4d23",
+												"mock",
+												"pstmn",
+												"io"
+											],
+											"path": [
+												"vidéos",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"videoid\":\"1\",\n    \"titre\":\"Ouvrir une boîte de conserve\",\n    \"description\":\"descrition non nulle pour l'exemple  ici mes sources\",\n    \"miniature\":\"nouvelleMiniature.png\",\n    \"fichier_video\":\"Boite_Conserve2.mp4\",\n    \"statut\":\"public\",\n    \"auteur\":\"Jacob Zapitoski\",\n    \"datePublication\":\"30/09/2024\"\n}"
+								}
+							]
+						}
+					],
+					"auth": {
+						"type": "oauth2",
+						"oauth2": [
+							{
+								"key": "tokenName",
+								"value": "Video lesly",
+								"type": "string"
+							},
+							{
+								"key": "clientId",
+								"value": "{{ClientIdjz}}",
+								"type": "string"
+							},
+							{
+								"key": "username",
+								"value": "{{auth0_lesly}}",
+								"type": "string"
+							},
+							{
+								"key": "scope",
+								"value": "openid",
+								"type": "string"
+							},
+							{
+								"key": "password",
+								"value": "{{auth0_leslyMDP}}",
+								"type": "string"
+							},
+							{
+								"key": "tokenRequestParams",
+								"value": [
+									{
+										"key": "audience",
+										"value": "https://video.com",
+										"enabled": true,
+										"send_as": "request_body"
+									}
+								],
+								"type": "any"
+							},
+							{
+								"key": "clientSecret",
+								"value": "{{ClientSecretjz}}",
+								"type": "string"
+							},
+							{
+								"key": "accessTokenUrl",
+								"value": "https://{{domainjz}}/oauth/token",
+								"type": "string"
+							},
+							{
+								"key": "grant_type",
+								"value": "password_credentials",
+								"type": "string"
+							},
+							{
+								"key": "addTokenTo",
+								"value": "header",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "tokenRequestParams",
+				"value": [
+					{
+						"key": "audience",
+						"value": "https://video.com",
+						"enabled": true,
+						"send_as": "request_body"
+					}
+				],
+				"type": "any"
+			},
+			{
+				"key": "scope",
+				"value": "openid",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "{{ClientSecretjz}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{ClientIdjz}}",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "https://{{domainjz}}/oauth/token",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "client_credentials",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "Video",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "serveur_authentification",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
